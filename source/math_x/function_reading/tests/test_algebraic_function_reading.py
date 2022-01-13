@@ -11,3 +11,9 @@ def test_lineal_arg_float():
     new_test = afr(2.2,3.4)
     print(f"Se esperaba otener el resultado: {target}, y se obtuvo {new_test.validate}")
     assert new_test.validate == target
+
+def test_lineal_arg_error():
+    target = False
+    new_test = afr(2,3.4,"2")
+    print(f"Se esperaba otener el resultado: {target}, y se obtuvo {new_test.validate}")
+    assert new_test.validate == target
