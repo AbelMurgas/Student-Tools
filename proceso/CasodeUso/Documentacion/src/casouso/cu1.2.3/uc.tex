@@ -1,0 +1,93 @@
+\begin{UseCase}{CU4}{Modificar el carrito de provedor} { %Cipriano
+	
+	Permite al actor Modificar sus diferentes productos a comprar con el provedor
+}
+	
+\UCitem{Versión}{1.0}
+\UCccsection{Administración}
+\UCccitem{Autor}{Martin Cipriano Ortiz Chavez}
+\UCccitem{Evaluador}{Eduardo Rivera}
+\UCccitem{Operación}{}
+\UCccitem{Prioridad}{Media}
+\UCccitem{Complejidad}{Media}
+\UCccitem{Volatilidad}{Baja}
+\UCccitem{Madurez}{}
+\UCccitem{Estatus}{Edición}
+\UCccitem{Fecha del último estatus}{19 diciembre 2021}
+
+%% Copie y pegue este bloque tantas veces como revisiones tenga el caso de uso.
+%% Esta sección la debe llenar solo el Revisor
+% %--------------------------------------------------------
+	%   % Revisión Versión (Anote la versión que se revisó.)
+\UCccsection{Revisión Versión 0.1 }
+% 	% FECHA: Anote la fecha en que se terminó la revisión.
+\UCccitem{Fecha}{} 
+% 	% EVALUADOR: Coloque el nombre completo de quien realizó la revisión.
+\UCccitem{Evaluador}{}
+% 	% RESULTADO: Coloque la palabra que mas se apegue al tipo de acción que el analista debe realizar.
+\UCccitem{Resultado}{}
+% 	% OBSERVACIONES: Liste los cambios que debe realizar el Analista.
+\UCccitem{Observaciones}{
+	\begin{UClist}
+		%\RCitem{PC1}{\DONE{En la pantalla falta el botón del ojito}}{18 de Abril del 2018}
+	\end{UClist}		
+}
+
+% %--------------------------------------------------------
+	
+\UCsection{Atributos}
+	\UCitem{Actor(es)}{
+		Responsable de agregar el producto del provedor
+	}
+	\UCitem{Propósito}{
+		Visualizar los diferentes provedores
+	}
+	\UCitem{Entradas}{
+		Cantidad 
+	}
+	\UCitem{Salidas}
+	{
+		
+			\UCli provedores									
+		
+	}
+
+	\UCitem{Precondiciones}{
+		Se tiene que haber creado y guardado el tipo de provedor
+	}
+	\UCitem{Postcondiciones}{
+		Ninguna
+	}
+	\UCitem{Reglas de negocio}{
+		Ninguna
+	}
+	\UCitem{Errores}{
+		Ninguna
+	}
+	\UCitem{Tipo}{Secundario}
+\end{UseCase}
+
+\begin{UCtrayectoria}
+	
+	\UCpaso[\UCactor] Da clic en la opción "Modificar el provedor".
+	
+	\UCpaso[\UCsist] Obtiene la información del provedor agregado o seleccionado.
+	
+	\UCpaso[\UCsist] Muestra la información del resultado.	
+	
+	\UCpaso[\UCactor] Solcita terminar de modificar provedor o productos, presionando el botón \cdtButton{Regresar}. 
+	
+	\UCpaso[\UCsist] Muestra la pantalla con un mensaje producto o provedor modificado con exito.
+	
+\end{UCtrayectoria}
+
+
+%...........::::::::::::TRAYECTORIAS ALTERNATIVAS::::::::::::::........
+%-------------------------Trayectoria A------------------------------
+
+\begin{UCtrayectoriaA}{A}{El empleado no pudo modificar}
+
+	\UCpaso [\UCsist] Envía el mensaje 1: \cdtRef{MSG}{Producto no encontrado}.
+	\UCpaso [\UCactor] Ingresa manualmente el código de barras o haciendo uso del  Include: \cdtRef{CU }{CU  Consultar provedor}. Se tendrá la opción de buscar los productos por nombre y desde ahí agregarlos al ticket de compra actual.	
+	\UCpaso [\UCsist]Regresamos ala Trayectoria principal 2
+\end{UCtrayectoriaA}

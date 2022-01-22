@@ -1,0 +1,130 @@
+% Caso de uso 1.4.3 -------------------------------------------------------------------------------
+\begin{UseCase} {CU 1.4.3}{Eliminar proveedor}{
+	Elimina el proveedor seleccionado de la base de datos.
+}
+
+% Información del caso de uso ---------------------------------------------------------------------
+
+\UCitem{Versión}{1.0}
+\UCccsection{Administración}
+\UCccitem{Autor}{Gonzaga Aparicio Josue}
+\UCccitem{Evaluador}{}
+\UCccitem{Operación}{}
+\UCccitem{Prioridad}{Alta}
+\UCccitem{Complejidad}{Baja}
+\UCccitem{Volatilidad}{}
+\UCccitem{Madurez}{Baja}
+\UCccitem{Estatus}{Edición}
+\UCccitem{Fecha del último estatus}{22 noviembre}
+
+% Revisión ----------------------------------------------------------------------------------------
+% Copie y pegue este bloque tantas veces como revisiones tenga el caso de uso.
+% Esta sección la debe llenar solo el Revisor
+
+% Revisión Versión % Anote la versión que se revisó
+\UCccsection{Revisión Versión 0.1 }
+
+% Fecha % Anote la fecha en que se terminó la revisión
+\UCccitem{Fecha}{} 
+
+% Evaluador % Coloque el nombre completo de quien realizó la revisión
+\UCccitem{Evaluador}{}
+
+% Resultado % Coloque la palabra que mas se apegue al tipo de acción que el analista debe realizar
+\UCccitem{Resultado}{}
+
+% Observaciones % Liste los cambios que debe realizar el Analista.
+\UCccitem{Observaciones}{}
+
+% Atributos ---------------------------------------------------------------------------------------
+	
+\UCsection{Atributos}
+
+	\UCitem{Actores}{
+		\cdtRef{Actor:Empleado}{Empleado} y \cdtRef{Actor:Sistema}{Sistema}.
+	}
+
+	\UCitem{Propósito}{
+		Actualizar la información de los proveedores cuando surjan cambios en sus datos.
+	}
+
+	\UCitem{Entradas}{
+		
+		\begin{UClist}			
+			Información básica del proveedor:
+
+			\UCli Nombre: (\cdtRef{proveedor:iapellido}{Primer apellido}, \cdtRef{proveedor:iiApellido}{Segundo apellido} y \cdtRef{proveedor:nombre}{Nombre}).
+			\UCli \cdtRef{proveedor:Empresa}{Empresa}.
+			\UCli \cdtRef{proveedor:Telefono}{Telefono}.
+			\UCli \cdtRef{proveedor:Correo}{Correo de contacto}.
+		\end{UClist}
+	}
+
+	\UCitem{Salidas}{
+		Ninguna.
+	}
+
+	\UCitem{Precondiciones}{
+		\begin{UClist}
+			\UCli Que exista un registo previo.
+		\end{UClist}
+	}
+
+	\UCitem{Postcondiciones}{
+		Ninguna.
+	}
+
+	\UCitem{Reglas de negocio}{
+		Ninguna.
+	}
+
+	\UCitem{Errores}{
+		Ninguna.
+	}
+
+	\UCitem{Tipo}{
+		
+	}
+\end{UseCase}
+
+%Trayectoria principal ----------------------------------------------------------------------------
+
+\begin{UCtrayectoria}
+	
+	\UCpaso [\UCactor]	En el la interfaz \cdtRef{UI}{Menú principal} selecciona \cdtButton{Menú proveedores}. 
+	\UCpaso [\UCsist]		Muestra la interfaz \cdtRef{UI}{Menú provedores}. \label{CU 4.3:P2}
+	\UCpaso [\UCactor]	Selecciona \cdtButton{Eliminar proveedor}.
+	\UCpaso [\UCsist]		Accede a la base de datos. \refTray{A} \refTray{B}
+	\UCpaso [\UCsist]		Muestra la interfaz \cdtRef{UI}{Eliminar proveedor}.
+	\UCpaso [\UCactor]	Selecciona el proveedor que quiere eliminar.
+	\UCpaso [\UCactor]	Muestra mensaje: \cdtRef{MSG}{¿Seguro que quiere eliminar el proveedor? Todos sus datos serán borrados}.
+	\UCpaso [\UCactor]	Selecciona \cdtButton{Confirmar}. \refTray{C}
+	\UCpaso [\UCsist]		Elimina proveedor de la base de datos.
+	\UCpaso [\UCsist]		Muestra mensaje: \cdtRef{MSG}{Proveedor eliminado con éxito}.
+	\UCpaso [\UCactor]	Selecciona \cdtButton{OK}
+	\UCpaso [\UCsist]		Muestra la interfaz \cdtRef{UI}{Menú Proveedores}.
+
+\end{UCtrayectoria}
+
+
+% Trayectorias alternativas -----------------------------------------------------------------------
+
+% Trayectoria A
+\begin{UCtrayectoriaA}{A}{Sin proveedores previamente registrados}
+	\UCpaso [\UCsist]		Muestra mensaje: \cdtRef{MSG}{No hay proveedores que eliminar}.
+	\UCpaso [\UCactor]	Selecciona \cdtButton{OK}
+	\UCpaso Regresa al paso \ref{CU 4.3:P2} de la trayectoria principal.
+\end{UCtrayectoriaA}
+
+% Trayectoria B
+\begin{UCtrayectoriaA}{B}{Base de datos no disponible}
+	\UCpaso [\UCsist]		Muestra mensaje: \cdtRef{MSG}{Base de Datos no disponible, por favor intente más tarde}.
+	\UCpaso [\UCactor]	Selecciona \cdtButton{OK}
+	\UCpaso Regresa al paso \ref{CU 4.3:P2} de la trayectoria principal.
+\end{UCtrayectoriaA}
+
+% Trayectoria C
+\begin{UCtrayectoriaA}{C}{Selecciona Cancelar}
+	\UCpaso [\UCactor]	Selecciona \cdtButton{Cancelar}
+	\UCpaso Regresa al paso \ref{CU 4.3:P2} de la trayectoria principal.
+\end{UCtrayectoriaA}

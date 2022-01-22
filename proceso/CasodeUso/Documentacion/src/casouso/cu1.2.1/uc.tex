@@ -1,0 +1,146 @@
+%Caso de uso 1.2.1
+\begin{UseCase} {CU1.2.1}{Buscar venta por Número de ticket}{
+	
+	Permite que el empleado pueda obtener los datos asociados de una venta en la BD, buscandóla por su número de ticket, para posteriormente devolver los productos seleccionados de la venta.
+}
+
+\UCitem{Versión}{1.0}
+\UCccsection{Administración}
+\UCccitem{Autor}{Rivera Morelos Eduardo Alfonso }
+\UCccitem{Evaluador}{}
+\UCccitem{Operación}{}
+\UCccitem{Prioridad}{Media}
+\UCccitem{Complejidad}{Baja}
+\UCccitem{Volatilidad}{Baja}
+\UCccitem{Madurez}{Alta}
+\UCccitem{Estatus}{Edición}
+\UCccitem{Fecha del último estatus}{31 de diciembre 2021}
+
+% Copie y pegue este bloque tantas veces como revisiones tenga el caso de uso.
+% Esta sección la debe llenar solo el Revisor
+% --------------------------------------------------------
+
+% Revisión Versión 
+% Anote la versión que se revisó
+\UCccsection{Revisión Versión 0.1 }
+
+% Fecha
+% Anote la fecha en que se terminó la revisión
+\UCccitem{Fecha}{} 
+
+% Evaluador
+% Coloque el nombre completo de quien realizó la revisión
+\UCccitem{Evaluador}{}
+
+% Resultado
+% Coloque la palabra que mas se apegue al tipo de acción que el analista debe realizar
+\UCccitem{Resultado}{}
+
+% Observaciones
+% Liste los cambios que debe realizar el Analista.
+\UCccitem{Observaciones}{}
+
+% --------------------------------------------------------
+	
+\UCsection{Atributos}
+	\UCitem{Actor(es)}
+	{
+		\cdtRef{Actor:RT}{Administrador de la farmacia}
+	}
+	\UCitem{Propósito}
+	{
+		Buscar una venta en la BD y Obtener los datos asociados a la venta.
+	}
+	\UCitem{Entradas}
+	{
+		\UCli Número de ticket.
+	}
+	\UCitem{Salidas}
+	{
+		\UCli Número de ticket.
+		\UCli Fecha y hora de venta.
+		\UCli Total de la venta.
+		\UCli Nombre de articulos vendidos.
+		\UCli Código de barras de articulos vendidos.
+		\UCli Descripción de articulos vendidos.
+		\UCli Cantidad de articulos vendidos.
+		\UCli P. de venta por articulo.
+		\UCli Subtotal por articulo.
+		
+	}
+
+	\UCitem{Precondiciones}
+	{
+		\UCli Cliente debe presentar ticket original.
+		\UCli Cliente debe presentar los articulos a devolver fisicamente.
+		\UCli Se toma en cuenta la RN014 y RN025 para consultar los detalles de la venta.
+		\UCli Se toma en cuenta la RN017 para el historial de ventas. %El historial de venta se inicio el 1ro de diciembre del 2021, por lo que ventas anteriores a la fecha del inicio del historial en la BD se tomarán como No. de ticket invalido para una busqueda. 
+	
+	}
+	\UCitem{Postcondiciones}
+	{
+		Ninguna
+	}
+	\UCitem{Reglas de negocio}
+	{
+		\UCli	\cdtRef{RN-010}{Formato de No. de ticket}
+		\UCli	\cdtRef{RN-014}{Datos esenciales de una venta}
+		\UCli	\cdtRef{RN-017}{No. de ticket para devolución}
+		\UCli	\cdtRef{RN-025}{Actualización de Fecha y hora de una venta}
+		
+	}
+	\UCitem{Errores}
+	{
+		Ninguna
+	}
+	\UCitem{Tipo}{}
+\end{UseCase}
+
+%Trayectoria principal
+
+\begin{UCtrayectoria}
+	\UCpaso [\UCactor] Da click en el botón de Devolución a cliente en la pantalla \cdtRef{UI}{Menú Principal}. \cdtButton{Devolución a cliente.}
+	\UCpaso [\UCsist] Muestra la pantalla1 \cdtRef{UI}{Devolución|Busqueda}.
+	\UCpaso [\UCsist] Solicita el Número de ticket.
+	\UCpaso [\UCactor] Escribe el número de ticket. 
+	\UCpaso [\UCactor] Da click en el botón buscar. \cdtButton {Buscar}
+	\UCpaso [\UCsist] Valida el formato del No. de ticket en base a la regla de negocio \cdtRef{RN-010}{Formato de No. de ticket}.\refTray{A}
+	\UCpaso [\UCsist] Valida el No. de ticket en base a la regla de negocio \cdtRef{RN-017}{No. de ticket para devolución}.\refTray{B}
+	\UCpaso [\UCsist] Busca la venta solicitada en la BD. \refTray{C}
+	\UCpaso [\UCsist] Obtiene la venta solicitada de la BD. \refTray{D}
+	\UCpaso [\UCsist] Obtiene los datos asociados a la venta: Número de ticket, Fecha y hora de venta, Total de la venta, Nombre de articulos vendidos, Código de barras de articulos vendidos, Descripción de articulos vendidos, Cantidad de articulos vendidos, P. de venta por articulo, Subtotal por articulo.
+	\UCpaso [\UCsist] Muestra los datos de la venta en la pantalla2 \cdtRef{UI}{Devolución|lista}\refTray{E}
+	
+
+	
+\end{UCtrayectoria}
+
+
+% Trayectorias alternativas
+% Trayectoria alternativa A
+\begin{UCtrayectoriaA}{A}{ Número de ticket no cumple con la RN: \cdtRef{RN-010}{Formato de No. de ticket}}
+	\UCpaso [\UCsist] Notifica con mensaje1: \cdtRef{MSG}{No. de ticket invalido}.
+	\UCpaso [\UCsist] Se regresará a el paso 2 de la TP.
+\end{UCtrayectoriaA}
+% Trayectoria alternativa B
+\begin{UCtrayectoriaA}{B}{ Número de ticket no cumple con la RN: \cdtRef{RN-017}{No. de ticket para devolución}}
+	\UCpaso [\UCsist] Notifica con mensaje1:\cdtRef{MSG}{No. de ticket invalido}.
+	\UCpaso [\UCsist] Se regresará a el paso 2 de la TP.
+\end{UCtrayectoriaA}
+
+%Trayectoria alternativa C
+\begin{UCtrayectoriaA}{C}{ Búsqueda en BD demora demasiado}
+	\UCpaso [\UCsist] Notifica con mensaje2:\cdtRef{MSG}{Busqueda no realizada}.
+	\UCpaso [\UCsist] Se regresará a el paso 2 de la TP.
+\end{UCtrayectoriaA}
+% Trayectoria alternativa D
+\begin{UCtrayectoriaA}{D}{ No obtiene la venta de la BD}
+	\UCpaso [\UCsist] Notifica con mensaje2:\cdtRef{MSG}{No. de ticket invalido}.
+	\UCpaso [\UCsist] Se regresará a el paso 2 de la TP.
+\end{UCtrayectoriaA}
+
+% Trayectoria alternativa E
+\begin{UCtrayectoriaA}{E}{ Venta vacia:sin datos de articulos}
+	\UCpaso [\UCsist] Muestra los datos principales de la venta en base a la regla de negocio \cdtRef{RN-014}{Datos esenciales de una venta} en la pantalla2 \cdtRef{UI}{Devolución|lista} 
+	\UCpaso [\UCsist] Se regresará a el paso 2 de la TP.
+\end{UCtrayectoriaA}

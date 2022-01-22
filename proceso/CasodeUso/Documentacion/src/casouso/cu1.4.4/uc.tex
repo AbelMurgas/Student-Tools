@@ -1,0 +1,123 @@
+\begin{UseCase}{CU 1.4.4}{Modificar proveedor} {%
+	
+	Modificar el proveedor seleccionado de la base de datos.
+}
+	
+\UCitem{Versión}{1.0}
+\UCccsection{Administración}
+\UCccitem{Autor}{Bravo Aguayo Alejandro}
+\UCccitem{Evaluador}{}
+\UCccitem{Operación}{}
+\UCccitem{Prioridad}{Media}
+\UCccitem{Complejidad}{Media}
+\UCccitem{Volatilidad}{Baja}
+\UCccitem{Madurez}{}
+\UCccitem{Estatus}{Edición}
+\UCccitem{Fecha del último estatus}{01 de diciembre del 2021}
+
+%% Copie y pegue este bloque tantas veces como revisiones tenga el caso de uso.
+%% Esta sección la debe llenar solo el Revisor
+% %--------------------------------------------------------
+	%   % Revisión Versión (Anote la versión que se revisó.)
+\UCccsection{Revisión Versión 0.1 }
+% 	% FECHA: Anote la fecha en que se terminó la revisión.
+\UCccitem{Fecha}{} 
+% 	% EVALUADOR: Coloque el nombre completo de quien realizó la revisión.
+\UCccitem{Evaluador}{}
+% 	% RESULTADO: Coloque la palabra que mas se apegue al tipo de acción que el analista debe realizar.
+\UCccitem{Resultado}{}
+% 	% OBSERVACIONES: Liste los cambios que debe realizar el Analista.
+\UCccitem{Observaciones}{
+	%\begin{UClist}
+		%\RCitem{PC1}{\DONE{En la pantalla falta el botón del ojito}}{18 de Abril del 2018}
+	%\end{UClist}		
+}
+
+% %--------------------------------------------------------
+	
+\UCsection{Atributos}
+	\UCitem{Actor(es)}{
+		\cdtRef{Sistema} y %\cdtRef{Administrador}
+	}
+	\UCitem{Propósito}{
+		Modificar información sobre algún proveedor registrado.
+	}
+	\UCitem{Entradas}{
+		Ninguna
+	}
+	\UCitem{Salidas}{		
+		Ninguna
+	}
+
+	\UCitem{Precondiciones}{
+		El proveedor debe haber sido previamente registrado en el sistema.
+	}
+	\UCitem{Postcondiciones}{
+		Ninguna
+	}
+	\UCitem{Reglas de negocio}{
+		Ninguna
+	}
+	\UCitem{Errores}{
+		Ninguna
+	}
+	\UCitem{Tipo}{
+		Secundario
+	}
+\end{UseCase}
+
+\begin{UCtrayectoria}
+	
+	\UCpaso[\UCactor] Da clic en la opción \cdtButton{Proveedores} de la pantalla \cdtIdRef{Menu principal}{Index}.
+
+	\UCpaso[\UCsist] Muestra pantalla \cdtIdRef{Menu Proveedores}{Index}.
+
+	\UCpaso[\UCactor] Da clic en la opción \cdtButton{Gestionar proveedor}.
+
+	\UCpaso[\UCsist] Obtiene todas las relaciones de los proveedores registrados en la bd. \refTray{A}
+
+	\UCpaso[\UCsist] Muestra la pantalla \cdtIdRef{---- Gestionar proveedor}{Index}.
+
+	\UCpaso[\UCactor] Da clic en el icono engrane de la sección 'ajustes' del proveedor al que desee modificar.
+
+	\UCpaso[\UCsist] Obtiene información del proveedor seleccionado y la muestra en la pantalla \cdtIdRef{---- Modificar proveedor}{Index}. \refTray{B}
+
+	\UCpaso[\UCactor] Realiza las modificaciones deseadas en los campos disponibles para modificación. \refTray{C} 
+
+	\UCpaso[\UCactor] Da clic en el boton \cdtButton{Guardar cambios}. 
+
+	\UCpaso[\UCsist] Realiza cambios y actualiza la bd. \refTray{D}
+
+	\UCpaso[\UCsist] Muestra el mensaje 1 'El proveedor fue actualizado con éxito' en la pantalla \cdtIdRef{-------- Alerta éxito al actualizar}{Index}.
+
+	\UCpaso[\UCactor] Da clic sobre 'ok'.
+
+	\UCpaso[\UCsist] Muestra la pantalla \cdtIdRef{Menu proveedores}{Index}.
+	
+\end{UCtrayectoria}
+
+
+%...........::::::::::::TRAYECTORIAS ALTERNATIVAS::::::::::::::........
+%-------------------------Trayectoria A------------------------------
+\begin{UCtrayectoriaA}{A}{Error de conexión a la base de datos.}
+	\UCpaso[\UCsist] Muestra el mensaje 2 'Error de conexion a la base de datos'.			
+	\UCpaso[\UCsist] Regresa a la pantalla \cdtIdRef{---- Gestionar proveedor}{Index}.
+\end{UCtrayectoriaA}
+
+\begin{UCtrayectoriaA}{B}{Error de conexión a la base de datos.}
+	\UCpaso[\UCsist] Muestra el mensaje 2 'Error de conexion a la base de datos'.			
+	\UCpaso[\UCsist] Regresa a la pantalla \cdtIdRef{---- Gestionar proveedor}{Index}.
+\end{UCtrayectoriaA}
+
+\begin{UCtrayectoriaA}{C}{El actor cancela la operación}
+	\UCpaso[\UCactor] Da clic en el boton \cdtButton{Cancelar}.			
+	\UCpaso[\UCsist] Regresa a la pantalla \cdtIdRef{---- Gestionar proveedor}{Index}.
+\end{UCtrayectoriaA}
+
+\begin{UCtrayectoriaA}{D}{Error de conexión a la base de datos.}
+	\UCpaso[\UCsist] Muestra el mensaje 3 'Error de conexion a la base de datos'.
+	\UCpaso[\UCsist] Muestra el mensaje 4 'No se guardaron las modificaciones al proveedor'.		
+	\UCpaso[\UCsist] Regresa a la pantalla \cdtIdRef{---- Gestionar proveedor}{Index}.
+\end{UCtrayectoriaA}
+
+

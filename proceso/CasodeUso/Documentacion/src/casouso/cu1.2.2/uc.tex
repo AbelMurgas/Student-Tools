@@ -1,0 +1,98 @@
+\begin{UseCase}{CU3}{Eliminar del Carrito} { %Cipriano
+	
+	El empleado eliminara el producto agregado en el sistema
+}
+	
+\UCitem{Versión}{1.0}
+\UCccsection{Administración}
+\UCccitem{Autor}{Martin Cipriano Ortiz Chavez}
+\UCccitem{Evaluador}{Jaime}
+\UCccitem{Operación}{}
+\UCccitem{Prioridad}{Alta}
+\UCccitem{Complejidad}{Media}
+\UCccitem{Volatilidad}{Baja}
+\UCccitem{Madurez}{Alta}
+\UCccitem{Estatus}{Edición}
+\UCccitem{Fecha del último estatus}{19 diciembre del 2021}
+
+%% Copie y pegue este bloque tantas veces como revisiones tenga el caso de uso.
+%% Esta sección la debe llenar solo el Revisor
+% %--------------------------------------------------------
+	%   % Revisión Versión (Anote la versión que se revisó.)
+\UCccsection{Revisión Versión 0.1 }
+% 	% FECHA: Anote la fecha en que se terminó la revisión.
+\UCccitem{Fecha}{} 
+% 	% EVALUADOR: Coloque el nombre completo de quien realizó la revisión.
+\UCccitem{Evaluador}{}
+% 	% RESULTADO: Coloque la palabra que mas se apegue al tipo de acción que el analista debe realizar.
+\UCccitem{Resultado}{}
+% 	% OBSERVACIONES: Liste los cambios que debe realizar el Analista.
+\UCccitem{Observaciones}{
+	\begin{UClist}
+		%\RCitem{PC1}{\DONE{En la pantalla falta el botón del ojito}}{18 de Abril del 2018}
+	\end{UClist}		
+}
+
+% %--------------------------------------------------------
+	
+\UCsection{Atributos}
+	\UCitem{Actor(es)}{
+		\cdtRef{Actor:RT}{Empleado}
+	}
+	\UCitem{Propósito}{
+		Visualizar la información de los Productos en existencia.
+	}
+	\UCitem{Entradas}{
+		Ninguna
+	}
+	\UCitem{Salidas}{
+		
+		\UCli Nombre del producto
+		\UCli Disponibilidad
+		
+		
+	}
+
+	\UCitem{Precondiciones}{
+		Haber registrado exitosamente a por lo menos un producto con la opción de poder eliminar.
+
+	}
+	\UCitem{Postcondiciones}{
+		Ninguna
+	}
+	\UCitem{Reglas de negocio}{
+		Ninguna
+	}
+	\UCitem{Errores}{
+		Ninguna
+	}
+	\UCitem{Tipo}{Ninguna}
+
+\end{UseCase}
+
+\begin{UCtrayectoria}
+	
+	\UCpaso[\UCactor] Selecciona la opción “Agregar Producto”.
+
+	UCpaso[\UCactor] Realiza un cambio en su pedido
+	
+	\UCpaso[\UCsist]  Muestra un selector de opciones 
+	
+	\UCpaso[\UCsist] Selecciona la opción que prefiera eliminar. 
+	
+	\UCpaso[\UCsist] Muestra la pantalla un mensaje "decea eliminar este producto" [Trayectoria alternativa A]
+	
+	\UCpaso[\UCsist] Solcita confirmacion.
+	
+	\UCpaso[\UCsist] Muestra la pantalla eliminado con exito
+	
+\end{UCtrayectoria}
+
+%...........::::::::::::TRAYECTORIAS ALTERNATIVAS::::::::::::::........
+%-------------------------Trayectoria A------------------------------
+\begin{UCtrayectoriaA}{A}{El sistema habre una ventana emergente.}
+	\UCpaso[\UCsist] Enviar mensaje 1: Producto eliminado.
+			
+	\UCpaso[] Regresa al paso 2 de la trayectoria principal.
+	
+\end{UCtrayectoriaA}

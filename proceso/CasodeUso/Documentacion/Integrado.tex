@@ -1,0 +1,146 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Tipo de documento y paquetes
+
+\documentclass[10pt]{book}
+%\usepackage{cdt/cdtAnalisis}
+%\usepackage{cdt/cdtProcesos}
+%\usepackage{cdt/iconos}
+\usepackage{subfigure}
+\usepackage{appendix}
+\usepackage{float}
+\usepackage{needspace}
+\floatstyle{boxed} 
+\setlength{\abovecaptionskip}{10pt}
+\setlength{\belowcaptionskip}{10pt}
+\setlength{\textfloatsep}{10pt}
+%\restylefloat{figure}
+
+%\usepackage{amsmath}
+%\usepackage{amssymb}
+\usepackage[utf8]{inputenc}
+%\texttt{}
+
+%\definecolor{comentarios}{rgb}{0.59, 0.6, 0.67}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Datos del proyecto
+
+
+%\documento{C1-DT}{Documentación Técnica}{\DRAFT{\today}} %\RELEASE{1.0}
+
+%	Línea para entrega de Sprints
+
+% Línea para entregas otras
+%	\documento{C2-DT}{Documentación Técnica\\Módulo Reinscripciones}{-RI} %\RELEASE{1.0}
+%	\documento{C1-DT}{Documentación Técnica}{ \RELEASE{1.0}} %\RELEASE{1.0}
+
+%\proyecto[CNV]{Herramientas de estudiantes}
+\author{Alianza}
+%\elaboro[Líder de proyecto]{}
+%\superviso[Responsable de proyecto]{}
+%\auxiliarB[Subdirector de Telecomunicaciones]{Omar David Zapién López}
+%\aprobo[Director General]{}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Presentación
+
+%\title{\varProyecto}
+%\subtitle {\varCveDocumento	\\ \varDocumento}
+
+%\setImgPortada{cdt/theme/portada}
+%\setImgPleca{cdt/theme/footer}
+%\setImgHeader{cdt/theme/logo}{cdt/theme/logo}
+%\setImgLogo{cdt/theme/header}{cdt/theme/header}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Configuración
+
+%=========================================================
+% Para ocultar la información de control de cambios.
+%\hideControlVersion
+
+%=========================================================
+% Para desactivar las referencias cruzadas.
+%   \disablePersistence
+
+%cdtSetCompileMode{genrefs}
+dtSetCompileMode{gendoc}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Inicio del Documento
+\begin{document}
+	
+	
+%\cdtLoadData
+	%=========================================================
+	% Portada
+	\thispagestyle{empty}
+%\maketitle
+	
+	%=========================================================
+	% Hoja de revisión
+%	\makeDocInfo
+%	\bigskip\\
+%	\makeObservaciones[3cm]
+	\vspace{2cm}
+	%    \makeFirmas
+	
+	%=========================================================
+	% Indices del documento
+\frontmatter
+\tableofcontents
+\listoffigures
+	\mainmatter
+	
+	%=========================================================
+	% Preambulo
+	%---------- Introducción ----------
+		\chapter{Introducción}
+	%	\label{ch:introduccion}
+	%	\input{introduccion/introduccion}
+	%
+	%    %---------- Nomenclatura ----------
+	    \chapter{Nomenclatura}
+	%  \label{ch:nomenclatura}
+	% \input{introduccion/nomenclatura}
+	
+	%---------------------------- Primera parte: Negocio ----------------------------%
+	
+	%	\part{Modelado del negocio}
+	%	\label{ch:modeloNegocio}
+	
+	%---------- Procesos ----------
+	\chapter{Modelado de proceso}
+	%	\label{ch:procesos}
+	%	\input{negocio/procesos}
+	
+	%---------- Modelo de estados ----------
+	\chapter{Modelo de estados}
+%	\label{ch:estados}
+%	\input{negocio/estados}	
+	
+	%---------- Reglas de negocio ----------
+	\chapter{Reglas de negocio}
+%	\label{ch:reglas}
+%	\input{negocio/reglas}
+	
+	%---------- Reglas del sistema ----------
+	\chapter{Reglas del sistema}
+	% \label{ch:reglas_sistema}
+%	\input{negocio/reglas_sistema}
+	
+	%---------- Modelo de actores ----------
+	\chapter{Modelo de actores}
+%	\label{ch:actores}
+%	\input{negocio/actores}
+	
+	
+	%-------------------- Primera parte: Modelado de comportamiento -------------------%
+%
+%	\input{cierre/cierre}
+%	\cdtSaveData
+	
+\end{document}

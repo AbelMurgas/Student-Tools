@@ -1,0 +1,135 @@
+%Caso de uso 2
+\begin{UseCase} {CU1.1.2.1}{Agregar producto mediante busqueda}{
+	El empleado agregará los productos que el cliente desea comprar mediante una busqueda,saber el monto de cada medicamento,monto total y el número de productos agregados a la venta.
+}
+
+\UCitem{Versión}{1.0}
+\UCccsection{Administración}
+\UCccitem{Autor}{Lechuga Canales Héctor Jair}
+\UCccitem{Evaluador}{Luis enrique Vázquez}
+\UCccitem{Operación}{Ventas}
+\UCccitem{Prioridad}{Alta}
+\UCccitem{Complejidad}{Media}
+\UCccitem{Volatilidad}{Baja}
+\UCccitem{Madurez}{Alta}
+\UCccitem{Estatus}{Edición}
+\UCccitem{Fecha del último estatus}{02 de enero}
+
+% Copie y pegue este bloque tantas veces como revisiones tenga el caso de uso.
+% Esta sección la debe llenar solo el Revisor
+% --------------------------------------------------------
+
+% Revisión Versión 
+% Anote la versión que se revisó
+\UCccsection{Revisión Versión 0.1 }
+
+% Fecha
+% Anote la fecha en que se terminó la revisión
+\UCccitem{Fecha}{03 de enero} 
+
+% Evaluador
+% Coloque el nombre completo de quien realizó la revisión
+\UCccitem{Evaluador}{Luis enrique Vázquez}
+
+% Resultado
+% Coloque la palabra que mas se apegue al tipo de acción que el analista debe realizar
+\UCccitem{Resultado}{redacción y ortografía}
+
+% Observaciones
+% Liste los cambios que debe realizar el Analista.
+\UCccitem{Observaciones}{acentos y signos de puntuación}
+
+% --------------------------------------------------------
+	
+\UCsection{Atributos}
+	\UCitem{Actor(es)}
+	{
+		\cdtRef{Actor:RT}{Administrador de la farmacia}
+	}
+	\UCitem{Propósito}
+	{
+		Agregar productos al carrito de compras mediante una busqueda.
+	}
+	\UCitem{Entradas}
+	{
+		
+		\UCli Nombre
+	}
+	\UCitem{Salidas}
+	{
+		\UCli Código de barras 
+		\UCli Descripción del producto
+		\UCli Precio de venta
+		\UCli Piezas
+		\UCli Existencia actual
+	}
+
+	\UCitem{Precondiciones}
+	{
+		\UCli El producto debe tener existencias. 
+		\UCli El producto debe estar previamente ingresado en el sistema
+
+
+	}
+	\UCitem{Postcondiciones}
+	{
+		Ninguna
+	}
+	\UCitem{Reglas de negocio}
+	{
+		\cdtRef{RN-3}{Venta con receta médica}
+	}
+	\UCitem{Errores}
+	{
+		Ninguna
+	}
+	\UCitem{Tipo}{}
+\end{UseCase}
+
+%Trayectoria principal
+
+\begin{UCtrayectoria}
+		
+	\UCpaso [\UCactor]Selecciona \cdtButton{Venta} en la interfaz del menú principal. consultar en página \pageref{UI: menu principal}
+	\UCpaso [\UCsist]Muestra la interfaz carrito. consultar en página \pageref{UI: carrito}
+	\UCpaso [\UCactor]Selecciona el boton \cdtButton{Buscar}.
+	\UCpaso [\UCsist]Despliega una pantalla emergente con un input text y un boton \cdtButton{Buscar} en la parte superios izquierda . consultar en página \pageref{UI: carrito buscar}
+	\UCpaso [\UCactor]Ingresara el nombre o las primeras letras de este del producto que desea buscar y seleciona \cdtButton{Buscar}.  \refTray{A} \label{CU 1.1.2.1:P5}	
+	\UCpaso [\UCsist] Include: \cdtRef{CU 1.5.3}{CU 1.5.3 Consultar productor}Obtiene los datos: Nombre, descripción del producto, cantidad, existencia actual y precio al publico de la BD de Productos de las coincidencias encontradas.
+	\UCpaso [\UCactor]Selecciona el producto que desea.
+	\UCpaso [\UCsist]Muestra en la parte inferior derecha un boton \cdtButton{Agregar}.
+	\UCpaso [\UCactor]Selecciona el boton \cdtButton{Agregar}.
+	\UCpaso [\UCsist]Agrega el producto al carrito de compras y regresa a la interfaz carrito. consultar en página \pageref{UI: carrito}
+
+	
+\end{UCtrayectoria}
+
+
+% Trayectorias alternativas
+% Trayectoria alternativa A
+
+\begin{UCtrayectoriaA}{A}{El articulo no esta en la BD}
+
+	\UCpaso [\UCsist] se mantiene la pantalla en blanco hasta que se encuetre alguna coincidencia.
+	\UCpaso [\UCsist]Regresamos al \ref{CU 1.1.2.1:P5} de la TP.
+\end{UCtrayectoriaA}
+
+
+% Trayectoria alternativa C
+
+% \begin{UCtrayectoriaA}{C}{Inventario con poca existencia.}
+
+% 	\UCpaso [\UCsist]Envía mensaje 2: \cdtRef{MSG}{Pocas existencias}.
+% 	\UCpaso [\UCsist]Regresamos al \ref{CU 1.1.1:P6} de la TP.
+
+% \end{UCtrayectoriaA}
+
+% Trayectoria alternativa D
+
+%\begin{UCtrayectoriaA}{D}{Inventario sin existencias.}
+
+%	\UCpaso [\UCsist]envía mensaje 3: \cdtRef{MSG}{ Producto sin existencias}.
+%	\UCpaso [\UCsist]Regresamos al \ref{CU 1.1.1:P4} de la TP.
+
+%\end{UCtrayectoriaA}
+

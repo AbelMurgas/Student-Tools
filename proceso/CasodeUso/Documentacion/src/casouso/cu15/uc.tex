@@ -1,0 +1,137 @@
+\begin{UseCase}{CUTI5.1-8}{Agregar proveedor} {%
+	
+El empleado agrega en el sistema un nuevo proveedor a través de un formulario que el sistema proporciona.
+	
+}
+	
+\UCitem{Versión}{1.0}
+\UCccsection{Administración}
+\UCccitem{Autor}{Reyes Vaca Mauricio Alberto}
+\UCccitem{Evaluador}{}
+\UCccitem{Operación}{}
+\UCccitem{Prioridad}{Alta}
+\UCccitem{Complejidad}{Media}
+\UCccitem{Volatilidad}{Baja}
+\UCccitem{Madurez}{Alta}
+\UCccitem{Estatus}{Edición}
+\UCccitem{Fecha del último estatus}{20 de noviembre del 2021}
+
+%% Copie y pegue este bloque tantas veces como revisiones tenga el caso de uso.
+%% Esta sección la debe llenar solo el Revisor
+% %--------------------------------------------------------
+	%   % Revisión Versión (Anote la versión que se revisó.)
+\UCccsection{Revisión Versión 0.1 }
+% 	% FECHA: Anote la fecha en que se terminó la revisión.
+\UCccitem{Fecha}{} 
+% 	% EVALUADOR: Coloque el nombre completo de quien realizó la revisión.
+\UCccitem{Evaluador}{}
+% 	% RESULTADO: Coloque la palabra que mas se apegue al tipo de acción que el analista debe realizar.
+\UCccitem{Resultado}{}
+% 	% OBSERVACIONES: Liste los cambios que debe realizar el Analista.
+\UCccitem{Observaciones}{
+	\begin{UClist}
+		%\RCitem{PC1}{\DONE{En la pantalla falta el botón del ojito}}{18 de Abril del 2018}
+	\end{UClist}		
+}
+
+% %--------------------------------------------------------
+	
+\UCsection{Atributos}
+	\UCitem{Actor(es)}{
+		\cdtRef{Actor:AT}{Administrador}
+	}
+	\UCitem{Propósito}{
+		Agregar al sistema un nuevo proveedor.
+	}
+	\UCitem{Entradas}{
+		\begin{UClist}
+			Información básica del proveedor.			
+			\UCli Nombre: (\cdtRef{Alumno:primerApellido}{Primer apellido}, \cdtRef{Alumno:segundoApellido}{Segundo apellido} y \cdtRef{Alumno:nombre}{Nombre}).
+			
+			\UCli \cdtRef{tesis:Título de la empresa}{Empresa}.
+			
+			\UCli \cdtRef{tesis:Telefono de contacto}{Telefono}.
+			
+			\UCli \cdtRef{tesis:Correo electronico}{Correo}.
+		\end{UClist}
+	}
+	\UCitem{Salidas}{
+
+	}
+
+	\UCitem{Precondiciones}{
+		Ninguna
+	}
+	\UCitem{Postcondiciones}{
+		Ninguna
+	}
+	\UCitem{Reglas de negocio}{
+		Ninguna
+	}
+	\UCitem{Errores}{
+		Ninguna
+	}
+	\UCitem{Tipo}{Primario}
+\end{UseCase}
+
+\begin{UCtrayectoria}
+	
+	\UCpaso[\UCactor] Selecciona \cdtButton{Proveedores} en la interfaz Menu principal.
+	\UCpaso[\UCsist] Muestra la interfaz Menu proveedores.
+	\UCpaso[\UCactor] Selecciona \cdtButton{Gestionar proveedor}.
+	\UCpaso[\UCsist] Obtiene todos los datos de los proveedores de la base de datos. \refTray{E}
+	\UCpaso[\UCsist] Muestra la interfaz con los datos anteriores.
+	\UCpaso[\UCactor] Selecciona el icono + para poder agregar un proveedor.
+	\UCpaso[\UCsist] Muestra la intrefaz de Agregar proveedores.\refTray{F}
+          \UCpaso[\UCactor] Ingresa el nombre de la empresa a donde pertenece el proveedor.
+	\UCpaso[\UCactor] Ingresa el nombre del proveedor.
+	\UCpaso[\UCactor] Ingresa el telefono del proveedor.
+	\UCpaso[\UCactor] Ingresa el correo del proveedor.
+	\UCpaso[\UCactor] Da clic en el botòn  \cdtButton{Guardar}. \refTray{A}
+	\UCpaso[\UCsist] Verifica que el telefono ingresado sea válido de acuerdo con la regla de negocio RN1.\refTray{B} 
+	\UCpaso[\UCsist] Verifica que el correo ingresado sea válido de acuerdo con la regla de negocio RN2.\refTray{C}
+	\UCpaso[\UCsist] Verifica que el proveedor no este repetido. \refTray{D}
+	\UCpaso[\UCsist] Asigna id al proveedor.
+	\UCpaso[\UCsist] Guarda los cambios en la base de datos.
+	\UCpaso[\UCsist] Envía mensaje 6: "El proveedor fue agregado con éxito".
+	\UCpaso[\UCsist] Vacía el formulario.
+	\UCpaso[\UCsist] Regresa a la pantalla de gestiòn de proveedores con la información registrada.
+	
+\end{UCtrayectoria}
+
+
+%...........::::::::::::TRAYECTORIAS ALTERNATIVAS::::::::::::::........
+%-------------------------Trayectoria A------------------------------
+\begin{UCtrayectoriaA}{A}{Campos incompletos}
+	\UCpaso[\UCsist] Envía el mensaje 1: "Debes ingresar la información requerida en todos los campos.			
+	\UCpaso[] Regresa al paso 8 de la trayectoria principal.
+\end{UCtrayectoriaA}
+
+%-------------------------Trayectoria B------------------------------
+\begin{UCtrayectoriaA}{B}{El número telefonico ingresado no es válido}
+	\UCpaso[\UCsist] Envía el mensaje 2: "Debes ingresar un número telefonico valido."			
+	\UCpaso[] Regresa al paso 8 de la trayectoria principal.
+\end{UCtrayectoriaA}
+
+%-------------------------Trayectoria C------------------------------
+\begin{UCtrayectoriaA}{C}{El correo ingresado no es valido}
+	\UCpaso[\UCsist] Envía el mensaje 3: "Debes ingresar un correo valido".			
+	\UCpaso[] Regresa al paso 8 de la trayectoria principal.
+\end{UCtrayectoriaA}
+
+%-------------------------Trayectoria D------------------------------
+\begin{UCtrayectoriaA}{D}{Proveedor previamente registrado}
+	\UCpaso[\UCsist] iclude: CU 1.4. Consultar proveedor. 
+	\UCpaso[\UCsist] Envía el mensaje 4: "El proveedor que ingresó ya había sido registrado con anterioridad, por favor ingrese uno nuevo."			
+	\UCpaso[] Regresa al paso 8 de la trayectoria principal.
+\end{UCtrayectoriaA}
+
+%-------------------------Trayectoria E------------------------------
+\begin{UCtrayectoriaA}{E}{Base de Datos caída}
+	\UCpaso[\UCsist] Envía el mensaje 5: "Base de Datos no disponible, por favor intente más tarde".			
+	\UCpaso[] Regresa al paso 2 de la trayectoria principal.
+\end{UCtrayectoriaA}
+%-------------------------Trayectoria F------------------------------
+\begin{UCtrayectoriaA}{F}{Click en regresar}
+	\UCpaso[] Regresa al paso 2 de la trayectoria principal.
+\end{UCtrayectoriaA}

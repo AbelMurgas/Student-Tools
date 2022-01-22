@@ -1,0 +1,148 @@
+ \documentclass[10pt]{book}
+\usepackage{cdt/cdtBusiness}
+\usepackage{eld}
+\usepackage{subfigure}
+\usepackage{cite}
+\usepackage{verbatim} 
+\usepackage{mdframed} 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Datos del proyecto
+
+\organizacion[Alianza]{Latinoamerica unida}
+\autor[Alianza]{}
+\sistema[Sistema de herramientas para estudiantes]{}
+\proyecto[PruebaProyecto]{Version Alfa}
+\documento{}{Sistema de herramientas para estudiantes }{\RELEASE{1.0}}% {\DRAFT{\today}} 
+
+\entregable{}{\Large{Sistema de administración de entradas y salidas de una farmacia}}
+
+\superviso[Nombre de la empresa que supervisa]{Nombre de la persona}
+\aprobo[area que aprueba]{nombrel del responsable} % Responsable Técnico (Contraparte)
+
+%\docRefs{
+%	
+%	%     \docItem{Catálogo de Escuelas}{}{Catálogo de Escuelas de la DGAIR (Dirección General de Acreditación, Incorporación y Revalidación) de la SEP (Secretaría de Educación Pública)}
+%	\docItem{Plan de Proyecto}{1.0}{ \cdtLabel{planProyecto}{Plan de proyecto del Programa de Acreditación de Escuelas Ambientalmente Responsables}}
+%	\docItem{PAEAR}{1.0}{ \cdtLabel{PAEAR}{Programa de Acreditación de Escuelas Ambientalmente Responsables}}
+%	\docItem{MPOCCT}{1.0}{ \cdtLabel{cct}{Manual de Procedmientos para la Operación del Catálogo de Centros de Trabajo}}
+%	%     \docItem{M-1TR}{1.0}{ \cdtLabel{M-3TR}{Minuta de la Primera Reunión de Toma de Requerimientos}}
+%	%     \docItem{M-2TR}{1.0}{ \cdtLabel{M-2TR}{Minuta de la Segunda Reunión de Toma de Requerimientos}}
+%	\docItem{M-3TR}{1.0}{ \cdtLabel{M-3TR}{Minuta de la Tercera Reunión de Toma de Requerimientos}}
+%}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Elementos contenidos en el documento
+
+% TODO: Al finalizar el análisis resuma aquí todos los elementos del componente: RN, CU, IU, MSG.
+\elemRefs{
+	
+	%Glosario de términos
+	%\elemItem{Glosario de términos}{1.0}{Descripción de los terminos técnicos y de negocio utilizados}
+	%---------------------------------------------------------------------------------------------------------------------------------------
+	
+	%Modelo de información
+	%\elemItem{Modelo Registro de escuelas}{1.0}{Descripción del modelo de información del Registro de escuelas}
+	%\elemItem{Modelo Periodos}{1.0}{Descripción del modelo de información de periodos de consumo de energía y agua}
+	
+	%---------------------------------------------------------------------------------------------------------------------------------------
+	
+	%Actores
+	%\elemItem{Coordinador del programa}{1.0}{Descripción del actor}
+	%---------------------------------------------------------------------------------------------------------------------------------------
+	
+	%Reglas de negocio
+	%\elemItem{RN-S1}{1.0}{Información correcta}
+	%---------------------------------------------------------------------------------------------------------------------------------------
+	
+	%Mensajes
+	%\elemItem{MSG1}{1.0}{Operación realizada exitosamente}
+	
+	%---------------------------------------------------------------------------------------------------------------------------------------
+	
+	%%%%%%%%%%%%%%%%%%%
+	%% CASOS DE USO %%%
+	%%%%%%%%%%%%%%%%%%%
+	
+	%%%% REGISTRO DE ESCUELAS %%%%
+	%\elemItem{CUR 1}{1.0}{Iniciar sesión}
+	
+	%%%%%%%%%%%%%%%%%%%
+	%%%% PANTALLAS %%%%
+	%%%%%%%%%%%%%%%%%%%
+	
+	%REGISTRO DE ESCUELAS
+	%\elemItem{MN1}{1.0}{Menú del Director del programa}
+	%\elemItem{MN2}{1.0}{Menú del Coordinador del programa}
+	%\elemItem{IUR 1}{1.0}{Iniciar sesión}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+	
+	%=========================================================
+	% Portada
+	\ThisLRCornerWallPaper{1}{cdt/theme/agua.jpeg}
+	\thispagestyle{empty}
+	
+	\maketitle
+	
+	%=========================================================
+	% Hoja de revisión
+	\makeDocInfo
+	\vspace{0.5cm}
+	\makeElemRefs
+	\makeDocRefs
+	\makeObservaciones[3cm] 
+	\vspace{0.5cm}
+	\makeFirmas
+	
+	%=========================================================
+	% Indices del documento
+	\frontmatter
+	\LRCornerWallPaper{1}{cdt/theme/pleca.jpg}
+	\tableofcontents
+	%\listoffigures
+	%\listoftables
+	\mainmatter
+	
+	% Para esconder la información del documentador se descomenta el \hideControlVersion
+	%\hideControlVersion
+	
+	%=========================================================
+	\chapter{Introducción}\label{chp:introduccion}
+	\cfinput{introduccion/introduccion}
+	
+
+	%=========================================================
+	%\chapter{Glosario de términos}\label{chp:glosarioTerminos}
+	
+	%=====================MODELO DE NEGOCIO==============================================================
+	\chapter{Modelo de negocio}\label{chp:modeloNegocios} 
+%	\cfinput{ModeloNegocios/modelo}
+%	\cfinput{ModeloNegocios/reglas}
+	
+	%=====================MODELO DE NEGOCIO==============================================================
+	\chapter{Pantallas}\label{chp:pantallas}
+%	\cfinput{pantallas/pantallas}
+	
+	%=====================MODELO DE NEGOCIO==============================================================
+	\chapter{Proceso}\label{chp:proceso}
+%	\cfinput{proceso/proceso}
+
+	%=====================MODELO DE COMPORTAMIENTO=======================================================
+	\chapter{Modelo de comportamiento}\label{chp:modeloComportamiento}
+	%\cfinput{casouso/cutemplate/uc}
+	%modulo1
+%	\cfinput{casouso/cu1.1.2/uc} %agregar producto al carrito de compras
+%	\cfinput{casouso/cu1.1.2.1/uc} %agregar producto al carrito de compras con busqueda
+%	\cfinput{casouso/cu1.1.5/uc} %cobrar
+	
+%	\cfinput {casouso/cu1.2.1/uc} %buscar por ticket
+%	\cfinput {casouso/cu1.2.1.3/uc} %devolver productos seleccionados
+%	\cfinput {casouso/cu1.3/uc} %Comprar a proveedor
+%	\cfinput {casouso/cu1.5.1/uc} %Registrar Producto
+	
+	%\section{Diseño de mensajes}
+	%\cfinput{ModeloInteraccion/mensajes}
+
+\end{document}

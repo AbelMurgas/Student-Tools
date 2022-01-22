@@ -1,0 +1,141 @@
+\begin{UseCase}{CU5}{Generar Credenciales a los alumnos} { %Luis Carlos
+	
+	Permite al actor visualizar la información registrada durante la planeación del examen profesional y posteriormente. También, si se ha registrado la evaluación del examen profesional podrá generar el acta correspondiente.
+}
+	
+\UCitem{Versión}{1.0}
+\UCccsection{Administración}
+\UCccitem{Autor}{Pimentel Escobedo Luis Carlos}
+\UCccitem{Evaluador}{}
+\UCccitem{Operación}{}
+\UCccitem{Prioridad}{Alta}
+\UCccitem{Complejidad}{Media}
+\UCccitem{Volatilidad}{Baja}
+\UCccitem{Madurez}{Alta}
+\UCccitem{Estatus}{Edición}
+\UCccitem{Fecha del último estatus}{27 de Septiembre del 2018}
+
+%% Copie y pegue este bloque tantas veces como revisiones tenga el caso de uso.
+%% Esta sección la debe llenar solo el Revisor
+% %--------------------------------------------------------
+	%   % Revisión Versión (Anote la versión que se revisó.)
+\UCccsection{Revisión Versión 0.1 }
+% 	% FECHA: Anote la fecha en que se terminó la revisión.
+\UCccitem{Fecha}{} 
+% 	% EVALUADOR: Coloque el nombre completo de quien realizó la revisión.
+\UCccitem{Evaluador}{}
+% 	% RESULTADO: Coloque la palabra que mas se apegue al tipo de acción que el analista debe realizar.
+\UCccitem{Resultado}{}
+% 	% OBSERVACIONES: Liste los cambios que debe realizar el Analista.
+\UCccitem{Observaciones}{
+	\begin{UClist}
+		%\RCitem{PC1}{\DONE{En la pantalla falta el botón del ojito}}{18 de Abril del 2018}
+	\end{UClist}		
+}
+
+% %--------------------------------------------------------
+	
+\UCsection{Atributos}
+	\UCitem{Actor(es)}{
+		\cdtRef{Actor:RT}{Responsable de Gestion Escolar} y \cdtRef{Actor:AT}{Auxiliar de Titulación}
+	}
+	\UCitem{Propósito}{
+		Generar credenciales a los alumnos de nuevo ingreso
+	}
+	\UCitem{Entradas}{
+		Ninguna
+	}
+	\UCitem{Salidas}{
+		
+		\begin{UClist}
+			Generacion de la credencial de usuario
+			\UCli \cdtRef{Actor:Seleccionar}{Menu}. \ioObtener.
+			
+			\UCli \cdtRef{Actor:Seleccionar}{Submenu} con profesores y alumnos: \ioObtener. 
+
+			\UCli Lista Alumnos Nuevo Ingreso: (\cdtRef{Alumno:primerApellido}{Primer apellido}, \cdtRef{Alumno:segundoApellido}{Segundo apellido} y \cdtRef{Alumno:nombre}{Nombre},\cdtRef{Alumno:email}{email}, \cdtRef{Alumno:usuario}{Usuario}, \cdtRef{Alumno:contrasenia}{Contraseña}). \ioObtener.
+
+			\UCli \cdtRef{generarUsuarios:Usuarios}{Genera} usuarios a los alumnos de nuevo ingreso: \ioObtener.
+
+			\UCli \cdtRef{generarContraseñas:Contraseñas}{Genera} contraseñas a los alumnos de nuevo ingreso: \ioObtener.
+			
+			\UCli \cdtRef{mensaje:generarMensaje}{Genera} mensaje de confirmacion: \ioObtener.
+
+			\UCli \cdtRef{actualizar:tablaAlumnos}{Actualiza} tabla de alumnos de nuevo ingreso: \ioObtener.
+
+			\UCli \cdtRef{mensaje:generarMensaje}{Genera} mensaje de confirmacion: \ioObtener.
+
+			\UCli \cdtRef{enviar:enviaCredenciales}{Envia} las credenciales por correo a los alumnos de nuevo ingreso: \ioObtener.
+
+			\UCli \cdtRef{mensaje:generarMensaje}{Genera} mensaje de confirmacion: \ioObtener.
+			
+			\UCli \cdtRef{actualizar:hora}{Hora} del examen: \ioObtener.
+			
+			\UCli \cdtRef{Salones:nombre}{Salón} del examen: \ioObtener. 
+			
+			
+			
+			
+			
+									
+		\end{UClist}
+	}
+
+	\UCitem{Precondiciones}{
+		El alumno debe de haber pasado el examen de ingreso
+	}
+	\UCitem{Postcondiciones}{
+		Ninguna
+	}
+	\UCitem{Reglas de negocio}{
+		Ninguna
+	}
+	\UCitem{Errores}{
+		Ninguna
+	}
+	\UCitem{Tipo}{Secundario, extiende del caso de uso \cdtIdRef{CUTI5.1-2}{Gestionar exámenes profesionales}.}
+\end{UseCase}
+
+\begin{UCtrayectoria}
+	
+	\UCpaso[\UCactor] Da clic en el ícono \btnVer de la pantalla \cdtIdRef{IUTI5.1-2}{Gestionar Exámenes Profesionales}.
+	
+	\UCpaso[\UCsist] Obtiene un submenu con opciones de alumnos y profesores
+	
+	\UCpaso[\UCsist] Obtiene la información del resultado.
+	
+	\UCpaso[\UCsist] Obtiene la información de los miembros del sínodo designado.
+	
+	\UCpaso[\UCsist] Obtiene la información de los miembros del sínodo examinador.
+	
+	\UCpaso[\UCsist] Muestra la pantalla \cdtIdRef{IUTI5.1-8}{Visualizar Resultado} con la información obtenida.
+	
+	\UCpaso[\UCactor] Solcita terminar la consulta presionando el botón \cdtButton{Regresar}. \refTray{A} \label{CUTI5.1-8:terminaConsulta}
+	
+	\UCpaso[\UCsist] Muestra la pantalla \cdtIdRef{IUTI5.1-2}{Gestionar Exámenes Profesionales}.
+	
+\end{UCtrayectoria}
+
+
+%...........::::::::::::TRAYECTORIAS ALTERNATIVAS::::::::::::::........
+%-------------------------Trayectoria A------------------------------
+\begin{UCtrayectoriaA}{A}{El actor solicita generar el acta.}
+	\UCpaso[\UCactor] Presiona el botón \cdtButton{Generar acta}.
+	
+	\UCpaso[\UCsist] Obtiene el primer apellido, segundo apellido y nombre del alumno.
+	
+	\UCpaso[\UCsist] Obtiene el nombre, primer apellido y segundo apellido de todo el sinodo examinador.
+
+	\UCpaso[\UCsist] Obtiene el nombre de la tesis presentada por el alumno.
+	
+	\UCpaso[\UCsist] Obtiene el resultado obtenido por el alumno en el examen profesional.
+	
+	\UCpaso[\UCsist] Obtiene las menciones especiales obtenidas por el alumno en el examen profesional.
+	
+	\UCpaso[\UCsist] Contruye el formato \cdtIdRef{IUTI5.1-8A}{Acta de Examen} con la información obtenida.
+	
+	\UCpaso[\UCsist] Descarga el formato generado.
+			
+	\UCpaso[] Regresa al paso \ref{CUTI5.1-8:terminaConsulta} de la trayectoria principal.
+	
+\end{UCtrayectoriaA}

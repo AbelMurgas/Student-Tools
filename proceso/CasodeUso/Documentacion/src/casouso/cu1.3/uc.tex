@@ -1,0 +1,178 @@
+\begin{UseCase}{CU 1.3}{Resurtido de producto} {%
+	
+	Permite al actor resurtir existencias al inventario del negocio, asi como tener acceso a la pantalla de "Agregar nuevo producto" y "Registrar nuevo proveedor" en caso de ser necesario.
+
+}
+	
+\UCitem{Versión}{1.0}
+\UCccsection{Administración}
+\UCccitem{Autor}{Apolonio Tierrablanca Oscar}
+\UCccitem{Evaluador}{}
+\UCccitem{Operación}{Resurtir}
+\UCccitem{Prioridad}{Alta}
+\UCccitem{Complejidad}{Media}
+\UCccitem{Volatilidad}{Baja}
+\UCccitem{Madurez}{Alta}
+\UCccitem{Estatus}{Edición}
+\UCccitem{Fecha del último estatus}{4 de enero de 2022}
+
+%% Copie y pegue este bloque tantas veces como revisiones tenga el caso de uso.
+%% Esta sección la debe llenar solo el Revisor
+% %--------------------------------------------------------
+	%   % Revisión Versión (Anote la versión que se revisó.)
+\UCccsection{Revisión Versión 0.1 }
+% 	% FECHA: Anote la fecha en que se terminó la revisión.
+\UCccitem{Fecha}{4 de enero de 2022} 
+% 	% EVALUADOR: Coloque el nombre completo de quien realizó la revisión.
+\UCccitem{Evaluador}{}
+% 	% RESULTADO: Coloque la palabra que mas se apegue al tipo de acción que el analista debe realizar.
+\UCccitem{Resultado}{}
+% 	% OBSERVACIONES: Liste los cambios que debe realizar el Analista.
+\UCccitem{Observaciones}{
+	\begin{UClist}
+		%\RCitem{PC1}{\DONE{En la pantalla falta el botón del ojito}}{18 de Abril del 2018}
+	\end{UClist}		
+}
+
+% %--------------------------------------------------------
+	
+\UCsection{Atributos}
+	\UCitem{Actor(es)}{
+		\cdtRef{Actor:RT}{Administrador de la farmacia} 
+	}
+	\UCitem{Propósito}{
+		Resurtir los productos que se encuentran a la venta en la farmacia.
+	}
+	\UCitem{Entradas}{
+		\UCli Proveedor
+		\UCli Nombre o codigo de producto.
+		\UCli Cantidad de producto que se ingresa.
+	}
+	\UCitem{Salidas}{
+		
+		Ninguna
+
+	}
+
+	\UCitem{Precondiciones}{
+		Tener al menos un proveedor registrado.
+	}
+	\UCitem{Postcondiciones}{
+		Ninguna
+	}
+	\UCitem{Reglas de negocio}{
+		\UCli \cdtRef{RN-07}{Asociacion de productos a proveedor}
+		\UCli \cdtRef{RN-08}{Cantidad minima de productos a resurtir}
+	}
+	\UCitem{Errores}{
+		\UCli El producto que se esta indicando no existe.
+	}
+	\UCitem{Tipo}{Primario.}
+\end{UseCase}
+
+
+\begin{UCtrayectoria}
+	
+	\UCpaso [\UCactor] Da click en el boon \cdtButton{Compra} de la pantalla principal que se encuentra en la pagina \pageref{UI: menu principal}.
+	
+	\UCpaso [\UCsist] Muestra la pantalla "Resurtir". (Pagina \pageref{UI: resurtir vacio})
+	
+	\UCpaso [\UCactor] Selecciona el proveedor al que se le estan comprando los productos dentro del menu desplegable. (Pagina \pageref{UI: seleccionar proveedor}) [Trayectoria alternativa A]
+	\UCpaso [\UCactor] Ingresa el codigo de producto leyendolo con el escaner o ingresandolo manualmente en el cuadro de texto "Código". [Trayectoria alternativa B] [Trayectoria alternativa C] 
+
+	\UCpaso [\UCsist] Muestra los productos indicados por el \UCactor.  (Pagina \pageref{UI: resurtir lleno}) [Trayectoria alternativa D]
+
+	\UCpaso [\UCactor] Indica la cantidad de producto que ingresa al sistema. [Trayectoria alternativa E]
+	
+	\UCpaso [\UCactor] Da click en el botón \cdtButton{Confirmar}. [Trayectoria alternativa F]
+
+	\UCpaso [\UCsist] Actualiza las existencias de los productos indicados por el usuario en el inventario.
+
+	\UCpaso [\UCsist] Muestra el mensaje "Se registro en el inventario la entrada de producto!". (Pagina {UI: resurtir ok}
+	
+	Extends: CU 1.3.1 Buscar producto a resurtir, CU 1.3.2 Agregar producto a resurtir, CU 1.3.3 Modificar cantidad de producto, CU 1.3.4 Eliminar producto a resurtir, 1.4 Registrar nuevo proveedor 1.5.1 Registrar producto nuevo al inventario
+	
+\end{UCtrayectoria}
+
+
+
+%...........::::::::::::TRAYECTORIAS ALTERNATIVAS::::::::::::::........
+%-------------------------Trayectoria A------------------------------
+\begin{UCtrayectoriaA}{A}{Registrar nuevo proveedor}
+	
+	\UCpaso[\UCactor] Da click en el botón \cdtButton{Nuevo Proveedor} al lado del menu desplegable. (Pagina \pageref{UI: resurtir vacio})
+
+	\UCpaso[\UCsist] Redirecciona al caso de uso CU 1.4 Registrar nuevo proveedor.
+
+	\UCpaso[\UCsist] Regresa al paso 4 de la TP.
+	
+\end{UCtrayectoriaA}
+
+\begin{UCtrayectoriaA}{B}{Agregar un producto buscandolo en el inventario.}
+	
+	\UCpaso[\UCactor] Da click en el botón \cdtButton{Buscar}.
+
+	\UCpaso[\UCsist] Redirecciona al CU 1.3.1 Buscar producto a resurtir.
+
+	\UCpaso[\UCsist] Regresa al paso 4 de la TP.
+	
+\end{UCtrayectoriaA}
+
+
+\begin{UCtrayectoriaA}{C}{Registrar nuevo producto}
+	
+	\UCpaso[\UCactor] Da click en el botón \cdtButton{Registrar} en la parte superior de la tabla "Resurtir". (Pagina \pageref{UI: resurtir vacio})
+
+	\UCpaso[\UCsist] Redirecciona al caso de uso CU 1.4 Registrar producto.
+
+	\UCpaso[\UCsist] Regresa al paso 4 de la TP.
+	
+\end{UCtrayectoriaA}
+
+\begin{UCtrayectoriaA}{D}{Eliminar un producto de la tabla}
+	
+	\UCpaso[\UCactor] Da click en el botón \cdtButton{Registrar} en la parte superior de la tabla "Resurtir". (Pagina \pageref{UI: resurtir vacio})
+
+	\UCpaso[\UCsist] Redirecciona al caso de uso CU 1.3.4 Eliminar producto a resurtir.
+
+	\UCpaso[\UCsist] Regresa al paso 4 de la TP.
+	
+\end{UCtrayectoriaA}
+
+\begin{UCtrayectoriaA}{F}{La tabla esta vacia.}
+
+	\UCpaso[\UCsist] Muestra el mensaje "Ingrese un producto".  (Pagina \pageref{UI: resurtir alerta busqueda})
+
+
+	\UCpaso[\UCsist] Regresa al paso 4 de la TP.
+	
+\end{UCtrayectoriaA}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

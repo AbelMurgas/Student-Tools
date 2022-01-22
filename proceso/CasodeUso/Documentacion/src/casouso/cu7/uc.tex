@@ -1,0 +1,159 @@
+\begin{UseCase}{CU7}{Generar ticket.} { 
+	
+	 Permite cumplir con las expectativas y mejorar la experiencia de tus clientes. Además, puedes aumentar la productividad, disminuir los tiempos de respuesta y obtener muchos beneficios tangibles para tus clientes.
+}
+	
+\UCitem{Versión}{1.0}
+\UCccsection{Administración}
+\UCccitem{Autor}{Martin Cipriano Ortiz Chavez}
+\UCccitem{Evaluador}{}
+\UCccitem{Operación}{}
+\UCccitem{Prioridad}{Alta}
+\UCccitem{Complejidad}{Media}
+\UCccitem{Volatilidad}{Baja}
+\UCccitem{Madurez}{Alta}
+\UCccitem{Estatus}{Edición}
+\UCccitem{Fecha del último estatus}{21 de noviembre del 2021}
+
+%% Copie y pegue este bloque tantas veces como revisiones tenga el caso de uso.
+%% Esta sección la debe llenar solo el Revisor
+% %--------------------------------------------------------
+	%   % Revisión Versión (Anote la versión que se revisó.)
+\UCccsection{Revisión Versión 0.1 }
+% 	% FECHA: Anote la fecha en que se terminó la revisión.
+\UCccitem{Fecha}{} 
+% 	% EVALUADOR: Coloque el nombre completo de quien realizó la revisión.
+\UCccitem{Evaluador}{}
+% 	% RESULTADO: Coloque la palabra que mas se apegue al tipo de acción que el analista debe realizar.
+\UCccitem{Resultado}{}
+% 	% OBSERVACIONES: Liste los cambios que debe realizar el Analista.
+\UCccitem{Observaciones}{
+	\begin{UClist}
+		%\RCitem{PC1}{\DONE{En la pantalla falta el botón del ojito}}{18 de Abril del 2018}
+	\end{UClist}		
+}
+
+% %--------------------------------------------------------
+	
+\UCsection{Atributos}
+	\UCitem{Actor(es)}{
+		\cdtRef{Actor:RT}{Farmacia}
+	}
+	\UCitem{Propósito}{
+		Visualizar la información del aspirante y gestionar
+	}
+	\UCitem{Entradas}{
+		\begin{UClist}
+		Información del Aspirante
+
+			\UCli nombre.
+			
+			\UCli Compra.
+			
+			\UCli Caja.
+			
+									
+		\end{UClist}
+
+	}
+	\UCitem{Salidas}{
+		
+		\begin{UClist}
+			Cliente
+			\UCli Nombre: \ioObtener.
+			
+			\UCli Dinero. \ioObtener.
+			
+			\UCli Receta: \ioObtener. 
+			
+								
+		\end{UClist}
+	}
+
+	\UCitem{Precondiciones}{
+		\UCli Tener una Compra.
+
+		\UCli Caja actualizadas.
+	}
+	\UCitem{Postcondiciones}{
+		Ninguna
+	}
+	\UCitem{Reglas de negocio}{
+		Ninguna
+	}
+	\UCitem{Errores}{
+		Ninguna
+	}
+	\UCitem{Tipo}{Ninguna}
+	\end{UseCase}
+
+\begin{UCtrayectoria}
+	
+	\UCpaso[\UCactor] Solicitar su pedido.
+	
+	\UCpaso[\UCsist] Mostrar interfaz Gestión de compras.
+	
+	\UCpaso[\UCactor] Solicitar datos de compra.
+
+	\UCpaso[\UCsist] Muestra datos de  producto.
+
+	\UCpaso[\UCactor] Seleccionar producto a comprar.
+	
+	\UCpaso[\UCsist] Valida proveedores que ofrecen dichos productos. \refTray{A}
+	
+	\UCpaso[\UCsist] Muestra proveedores de producto seleccionado. \refTray{B}
+
+	\UCpaso[\UCactor] Selecciona proveedor.
+
+	\UCpaso[\UCactor] Pulsa tecla de confirmar.
+	
+	\UCpaso[\UCsist] Validar datos producto proveedor. \refTray{C}
+	
+	\UCpaso[\UCsist] Mostrar Lista de Productos realizados. \refTray{D}
+
+	\UCpaso[\UCsist] Valida que el sea correcto el producto. \refTray{E}
+
+	\UCpaso[\UCsist] Pedir Cantidad por productos.
+
+	\UCpaso[\UCactor] Ingresar cantidad de productos.
+
+	\UCpaso[\UCsist] Muestra reporte de producto y su respectiva cantidad, Registro exitoso.
+
+	\UCpaso[\UCsist] Genera monto a pagar.
+	 
+	\UCpaso[\UCactor] Solicita reporte de compra
+
+	\UCpaso[\UCsist] Imprime TICKET.
+
+	\UCpaso[\UCsist] Abandona la interfaz gestionar compras.
+
+	\UCpaso[\UCactor] Salir del sistema.
+	
+\end{UCtrayectoria}
+
+
+%...........::::::::::::TRAYECTORIAS ALTERNATIVAS::::::::::::::........
+%-------------------------Trayectoria A------------------------------
+\begin{UCtrayectoriaA}{A}{El usuario no ingresó los datos obligatorios}
+	
+	\UCpaso[\UCsist] Envía el mensaje 2: Debes ingresar todos los campos marcados como obligatorios.
+	
+	\UCpaso[] Regresa al paso 2 de la trayectoria principal.
+	
+\end{UCtrayectoriaA}
+
+%.......................Trayectoria B..................................
+\begin{UCtrayectoriaA}{B}{El CURP no cumple con un formato válido.}
+	\UCpaso[\UCsist] Muestra el mensaje 3: El CURP no cumple con un formato válido
+			
+	\UCpaso[] Regresa al paso 6 de la trayectoria principal.
+	
+\end{UCtrayectoriaA}
+
+%-------------------------Trayectoria C------------------------------
+\begin{UCtrayectoriaA}{C}{Rango de edad del aspirante}
+	\UCpaso[\UCsist]Comprueba que tenga una cierta edad para poder ser registrado
+			
+	\UCpaso[] Regresa al paso 2 de la trayectoria principal.
+	
+\end{UCtrayectoriaA}

@@ -1,0 +1,120 @@
+\begin{UseCase}{CU14}{Cancelar el registro de un aspirante} {  %Eduardo Riv
+	
+	Permite al administrador Cancelar el registro del aspirante de acuerdo a las RN para la admisión.
+
+
+}
+	
+\UCitem{Versión}{1.0}
+\UCccsection{Admisiones}
+\UCccitem{Autor}{Eduardo Alfonso Rivera Morelos}
+\UCccitem{Evaluador}{}
+\UCccitem{Operación}{}
+\UCccitem{Prioridad}{Alta}
+\UCccitem{Complejidad}{Media}
+\UCccitem{Volatilidad}{Baja}
+\UCccitem{Madurez}{Alta}
+\UCccitem{Estatus}{Edición}
+\UCccitem{Fecha del último estatus}{28 de Octubre de 2021}
+
+%% Copie y pegue este bloque tantas veces como revisiones tenga el caso de uso.
+%% Esta sección la debe llenar solo el Revisor
+% %--------------------------------------------------------
+	%   % Revisión Versión (Anote la versión que se revisó.)
+\UCccsection{Revisión Versión 0.1 }
+% 	% FECHA: Anote la fecha en que se terminó la revisión.
+\UCccitem{Fecha}{} 
+% 	% EVALUADOR: Coloque el nombre completo de quien realizó la revisión.
+\UCccitem{Evaluador}{}
+% 	% RESULTADO: Coloque la palabra que mas se apegue al tipo de acción que el analista debe realizar.
+\UCccitem{Resultado}{}
+% 	% OBSERVACIONES: Liste los cambios que debe realizar el Analista.
+\UCccitem{Observaciones}{
+	\begin{UClist}
+		%\RCitem{PC1}{\DONE{En la pantalla falta el botón del ojito}}{18 de Abril del 2018}
+	\end{UClist}		
+}
+
+% %--------------------------------------------------------
+	
+\UCsection{Atributos}
+	\UCitem{Actor(es)}
+	{
+		\cdtRef{Actor:RT}{Administrador}
+	}
+	\UCitem{Propósito}
+	{
+		Cancelar el registro de un aspirante por infligir las reglas de negocio
+	}
+	\UCitem{Entradas}
+	{
+		\UCli Folio de aspirante
+	}
+	\UCitem{Salidas}
+	{
+		\UCli Nombre
+		\UCli Fecha de nacimiento
+		\UCli Telefono
+		\UCli Estatus: Cancelado.
+	}
+
+	\UCitem{Precondiciones}
+	{
+		\UCli Que exista un registo previo
+	}
+	\UCitem{Postcondiciones}
+	{
+		Ninguna
+	}
+	\UCitem{Reglas de negocio}
+	{
+		\UCli El aspirante no debe hacer trampa. No pueden existir más de un registro por aspirante. Se cancela el registro por petición del alumno o infringe una regla de negocio. 
+	}
+	\UCitem{Errores}
+	{
+		Ninguna
+	}
+	\UCitem{Tipo}{}
+\end{UseCase}
+
+%Trayectoria principal
+
+\begin{UCtrayectoria}
+		
+	
+
+	
+	
+	\UCpaso [\UCactor]Administrador: Selecciona la opción “Cancelar el registro del aspirante”.
+	\UCpaso [\UCsist]Incluye: CU “Consultar los datos de un aspirante”.
+	\UCpaso [\UCactor]Selecciona opción consultar registro.
+	\UCpaso [\UCsist]Muestra un recuadro donde se le pide al aspirante su folio.
+	\UCpaso [\UCactor]Ingresa su folio dentro del recuadro correspondiente
+	\UCpaso [\UCactor]Selecciona el botón \cdtButton{Buscar}
+	\UCpaso [\UCsist]Busca al usuario.
+	\UCpaso [\UCsist]Muestra los datos del aspirante registrado.
+	\UCpaso [\UCsist]Notifica mensaje 1: Consulta realizada.
+	\UCpaso [\UCsist]Sistema: Muestra la interfaz  i.3.a “Cancelar registro de sustentante”
+	\UCpaso [\UCactor]Administrador: Pulsa el botón “Cancelar registro” \cdButton{Cancelar}
+	\UCpaso [\UCsist]Sistema: Muestra mensaje m.5.a “Seguro que desea cancelar los datos”
+	\UCpaso [\UCsist]Sistema: Muestra botones “Aceptar” y “Cancelar” .
+	\UCpaso [\UCactor]Selecciona el botón “Aceptar” [Trayectoria Alternativa A] \cdButton{Aceptar}
+	\UCpaso [\UCsist]Sistema: Actualiza el estado del registro.
+	\UCpaso [\UCsist]Sistema: Muestra el mensaje m.9.a  “Registro cancelado”.
+\end{UCtrayectoria}
+
+
+%...........::::::::::::TRAYECTORIAS ALTERNATIVAS::::::::::::::........
+% Trayectorias alternativas
+% Trayectoria alternativa A
+
+\begin{UCtrayectoriaA}{A}{El administrador selecciona el botón “Cancelar” }
+	\UCpaso [\UCactor]Selecciona el botón “Cancelar”  \cdButton{Cancelar}
+	\UCpaso [\UCsist] Muestra mensaje 2:  “Proceso Cancelado”.
+	\UCpaso [\UCsist] Regresamos al paso 2 de la TP.		
+
+\end{UCtrayectoriaA}
+
+% Trayectoria alternativa B
+
+

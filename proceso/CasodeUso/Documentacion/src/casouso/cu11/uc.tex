@@ -1,0 +1,150 @@
+\begin{UseCase}{CU11}{Crear comprobante} { %Aquiles
+	
+Registrar el comprobante de registro de un aspirante para realizar el examen de admisión, el comprobante de registro es un comprobante para el aspirante que guardará impreso.
+
+}
+	
+\UCitem{Versión}{1.0}
+\UCccsection{Administración}
+\UCccitem{Autor}{Piña Olvera Aquiles }
+\UCccitem{Evaluador}{}
+\UCccitem{Operación}{}
+\UCccitem{Prioridad}{Alta}
+\UCccitem{Complejidad}{Media}
+\UCccitem{Volatilidad}{Baja}
+\UCccitem{Madurez}{Alta}
+\UCccitem{Estatus}{Edición}
+\UCccitem{Fecha del último estatus}{27 de Septiembre del 2018}
+
+%% Copie y pegue este bloque tantas veces como revisiones tenga el caso de uso.
+%% Esta sección la debe llenar solo el Revisor
+% %--------------------------------------------------------
+	%   % Revisión Versión (Anote la versión que se revisó.)
+\UCccsection{Revisión Versión 0.1 }
+% 	% FECHA: Anote la fecha en que se terminó la revisión.
+\UCccitem{Fecha}{} 
+% 	% EVALUADOR: Coloque el nombre completo de quien realizó la revisión.
+\UCccitem{Evaluador}{}
+% 	% RESULTADO: Coloque la palabra que mas se apegue al tipo de acción que el analista debe realizar.
+\UCccitem{Resultado}{}
+% 	% OBSERVACIONES: Liste los cambios que debe realizar el Analista.
+%\UCccitem{Observaciones}{
+%	\begin{UClist}
+		%\RCitem{PC1}{\DONE{En la pantalla falta el botón del ojito}}{18 de Abril del 2018}
+%	\end{UClist}		
+%}
+
+% %--------------------------------------------------------
+	
+\UCsection{Atributos}
+	\UCitem{Actor(es)}{
+		\cdtRef{Actor:RT}{Responsable de Titulación} y \cdtRef{Actor:AT}{Auxiliar de Titulación}
+	}
+	\UCitem{Propósito}{
+	%	Visualizar la información del examen profesional y generar el acta correspondiente.
+	}
+	\UCitem{Entradas}{
+		Ninguna
+	}
+	\UCitem{Salidas}{
+		
+		\begin{UClist}
+		%	Información del examen profesional
+			\UCli \cdtRef{Alumno:matricula}{Matrícula}. \ioObtener.
+			
+			\UCli Nombre: (\cdtRef{Alumno:primerApellido}{Primer apellido}, \cdtRef{Alumno:segundoApellido}{Segundo apellido} y \cdtRef{Alumno:nombre}{Nombre}). \ioObtener.
+			
+			\UCli \cdtRef{tesis:temaTesis}{Tema} de la tesis: \ioObtener.
+			
+			\UCli \cdtRef{horarioExamenProfesional:fecha}{Fecha} del examen: \ioObtener.
+			
+			\UCli \cdtRef{horarioExamenProfesional:hora}{Hora} del examen: \ioObtener.
+			
+			\UCli \cdtRef{Salones:nombre}{Salón} del examen: \ioObtener. 
+			
+			
+		%	Información del resultado:
+			\UCli \cdtRef{informacionExamenProfesional:actaEgresado}{Acta y/o Egresado}: \ioObtener. 
+			
+			\UCli \cdtRef{resultadoExamenProfesional:resultado}{Resultado}: \ioObtener.
+			
+			\UCli \cdtRef{resultadoExamenProfesional:mencionEspecial}{Mención especial}: \ioObtener.
+						
+			
+			
+			
+		%	
+		%	Información para el acta de examen:
+			\UCli \cdtRef{horarioExamenProfesional:fecha}{Fecha} del examen profesional. \ioObtener.
+			
+			\UCli \cdtRef{horarioExamenProfesional:salon}{Salón} del examen profesional. \ioObtener.
+			
+			\UCli Nombre: (\cdtRef{Alumno:nombre}{Nombre}, \cdtRef{Alumno:primerApellido}{Primer apellido} y \cdtRef{Alumno:segundoApellido}{Segundo apellido}). \ioObtener.
+			
+			\UCli Sínodo examinador:  (\cdtRef{profesor:tituloTratamiento}{Título de tratamiento}, \cdtRef{profesor:nombre}{Nombre}, \cdtRef{profesor:primerApellido}{Primer apellido} y \cdtRef{profesor:segundoApellido}{Segundo apellido}) del personal interno y (\cdtRef{invitado:nombre}{Nombre}, \cdtRef{invitado:primerApellido}{Primer apellido} y \cdtRef{invitado:segundoApellido}{Segundo apellido}) del personal externo. \ioObtener.						
+		\end{UClist}
+	}
+
+	\UCitem{Precondiciones}{
+		Ninguna
+	}
+	\UCitem{Postcondiciones}{
+		Ninguna
+	}
+	\UCitem{Reglas de negocio}{
+		Ninguna
+	}
+	\UCitem{Errores}{
+		Ninguna
+	}
+	\UCitem{Tipo}{Secundario, extiende del caso de uso \cdtIdRef{CUTI5.1-2}{Gestionar exámenes profesionales}.}
+\end{UseCase}
+
+\begin{UCtrayectoria}
+	
+	\UCpaso[\UCsist] CU Buscar sustentante
+	
+	\UCpaso[\UCsist] Selecciona opción generar comprobante.
+	
+	
+	\UCpaso[\UCsist] Genera el comprobante de registro del aspirante.
+	
+	
+	\UCpaso[\UCsist] Guarda el comprobante de registro del aspirante en la base de datos. 
+	
+	
+	\UCpaso[\UCsist]Muestra una vista previa del comprobante de registro en PDF.
+	
+	
+	\UCpaso[\UCsist] Notifica al aspirante el mensaje 1: Comprobante generado exitosamente.
+	
+	
+	\UCpaso[\UCactor] Solcita terminar la consulta presionando el botón \cdtButton{Regresar}. \refTray{A} \label{CUTI5.1-8:terminaConsulta}
+	
+	\UCpaso[\UCsist] Muestra la pantalla \cdtIdRef{IUTI5.1-2}{Gestionar Exámenes Profesionales}.
+	
+\end{UCtrayectoria}
+
+
+%...........::::::::::::TRAYECTORIAS ALTERNATIVAS::::::::::::::........
+%-------------------------Trayectoria A------------------------------
+\begin{UCtrayectoriaA}{A}{El actor solicita generar el acta.}
+	\UCpaso[\UCactor] Presiona el botón \cdtButton{Generar acta}.
+	
+	\UCpaso[\UCsist] Obtiene el primer apellido, segundo apellido y nombre del alumno.
+	
+	\UCpaso[\UCsist] Obtiene el nombre, primer apellido y segundo apellido de todo el sinodo examinador.
+
+	\UCpaso[\UCsist] Obtiene el nombre de la tesis presentada por el alumno.
+	
+	\UCpaso[\UCsist] Obtiene el resultado obtenido por el alumno en el examen profesional.
+	
+	\UCpaso[\UCsist] Obtiene las menciones especiales obtenidas por el alumno en el examen profesional.
+	
+%	\UCpaso[\UCsist] Contruye el formato \cdtIdRef{IUTI5.1-8A}{Acta de Examen} con la información obtenida.
+	
+%	\UCpaso[\UCsist] Descarga el formato generado.
+			
+	\UCpaso[] Regresa al paso \ref{CUTI5.1-8:terminaConsulta} de la trayectoria principal.
+	
+\end{UCtrayectoriaA}

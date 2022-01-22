@@ -1,0 +1,98 @@
+\begin{UseCase}{CU3}{Consulta de vacante} { %Mauricio
+	
+	El sistema muestra al usuario una lista de las vacantes disponibles, de manera filtrada 
+muestra estás de acuerdo con lo seleccionado por el usuario. 
+}
+	
+\UCitem{Versión}{1.0}
+\UCccsection{Administración}
+\UCccitem{Autor}{Reyes Vaca Mauricio Alberto}
+\UCccitem{Evaluador}{Jaime}
+\UCccitem{Operación}{}
+\UCccitem{Prioridad}{Alta}
+\UCccitem{Complejidad}{Media}
+\UCccitem{Volatilidad}{Baja}
+\UCccitem{Madurez}{Alta}
+\UCccitem{Estatus}{Edición}
+\UCccitem{Fecha del último estatus}{03 de Octubre del 2021}
+
+%% Copie y pegue este bloque tantas veces como revisiones tenga el caso de uso.
+%% Esta sección la debe llenar solo el Revisor
+% %--------------------------------------------------------
+	%   % Revisión Versión (Anote la versión que se revisó.)
+\UCccsection{Revisión Versión 0.1 }
+% 	% FECHA: Anote la fecha en que se terminó la revisión.
+\UCccitem{Fecha}{} 
+% 	% EVALUADOR: Coloque el nombre completo de quien realizó la revisión.
+\UCccitem{Evaluador}{}
+% 	% RESULTADO: Coloque la palabra que mas se apegue al tipo de acción que el analista debe realizar.
+\UCccitem{Resultado}{}
+% 	% OBSERVACIONES: Liste los cambios que debe realizar el Analista.
+\UCccitem{Observaciones}{
+	\begin{UClist}
+		%\RCitem{PC1}{\DONE{En la pantalla falta el botón del ojito}}{18 de Abril del 2018}
+	\end{UClist}		
+}
+
+% %--------------------------------------------------------
+	
+\UCsection{Atributos}
+	\UCitem{Actor(es)}{
+		\cdtRef{Actor:RT}{Encargado de recursos humanos} y \cdtRef{Actor:AT}{Usuario}
+	}
+	\UCitem{Propósito}{
+		Visualizar la información de las vacantes en existencia.
+	}
+	\UCitem{Entradas}{
+		Ninguna
+	}
+	\UCitem{Salidas}{
+		
+		\begin{UClist}
+			Información del examen profesional
+			\UCli \cdtRef{vacante:nombreVacante}{Vacante}. \ioObtener.
+			
+			\UCli \cdtRef{vacante:areaVacante}{Area} de la vacante: \ioObtener.
+			
+			\UCli \cdtRef{vacante:sueldoVacante}{Sueldo} de la vacante: \ioObtener.
+			
+			\UCli \cdtRef{vacante:descripcionVacante}{Descripcion} de la vacante: \ioObtener.				
+		
+			\UCli \cdtRef{vacante:turnoVacante}{Turno} de la vacante: \ioObtener.
+
+		\end{UClist}
+	}
+
+	\UCitem{Precondiciones}{
+		Haber registrado exitosamente a por lo menos una vacante con la opción “Crear 
+vacante”.
+	}
+	\UCitem{Postcondiciones}{
+		Ninguna
+	}
+	\UCitem{Reglas de negocio}{
+		Ninguna
+	}
+	\UCitem{Errores}{
+		Ninguna
+	}
+	\UCitem{Tipo}{Secundario, extiende del caso de uso \cdtIdRef{CUTI5.1-2}{Registrar vacantes}.}
+\end{UseCase}
+
+\begin{UCtrayectoria}
+	
+	\UCpaso[\UCactor] Selecciona la opción “Bolsa de trabajo”.
+	
+	\UCpaso[\UCsist]  Muestra un selector de opciones llamado “puesto”.
+	
+	\UCpaso[\UCsist] Selecciona la opción que prefiera buscar. 
+	
+	\UCpaso[\UCsist] Selecciona el botón “Buscar”.
+	
+	\UCpaso[\UCsist] Muestra la pantalla \cdtIdRef{IUTI5.1-8}{Visualizar Resultado} con la información obtenida.
+	
+	\UCpaso[\UCactor] Solcita terminar la consulta presionando el botón \cdtButton{Regresar}. \label{CUTI5.1-8:terminaConsulta}
+	
+	\UCpaso[\UCsist] Muestra la pantalla \cdtIdRef{IUTI5.1-2}{Index}.
+	
+\end{UCtrayectoria}

@@ -1,0 +1,151 @@
+\begin{UseCase}{CU_RDoc}{Registrar los documentos de un aspirante} { %Villavicencio Kevin
+	
+	Permite al actor registrar las calificaciones que se obtuvieron en el departamental actual, asignando dicha calificación a los alumnos registrados en la materia.
+}
+	
+\UCitem{Versión}{1.0}
+\UCccsection{Administración}
+\UCccitem{Autor}{García Hernández Héctor Daniel}
+\UCccitem{Evaluador}{}
+\UCccitem{Operación}{}
+\UCccitem{Prioridad}{Alta}
+\UCccitem{Complejidad}{Media}
+\UCccitem{Volatilidad}{Baja}
+\UCccitem{Madurez}{Alta}
+\UCccitem{Estatus}{Edición}
+\UCccitem{Fecha del último estatus}{27 de Septiembre del 2018}
+
+%% Copie y pegue este bloque tantas veces como revisiones tenga el caso de uso.
+%% Esta sección la debe llenar solo el Revisor
+% %--------------------------------------------------------
+	%   % Revisión Versión (Anote la versión que se revisó.)
+\UCccsection{Revisión Versión 0.1 }
+% 	% FECHA: Anote la fecha en que se terminó la revisión.
+\UCccitem{Fecha}{} 
+% 	% EVALUADOR: Coloque el nombre completo de quien realizó la revisión.
+\UCccitem{Evaluador}{}
+% 	% RESULTADO: Coloque la palabra que mas se apegue al tipo de acción que el analista debe realizar.
+\UCccitem{Resultado}{}
+% 	% OBSERVACIONES: Liste los cambios que debe realizar el Analista.
+\UCccitem{Observaciones}{
+	\begin{UClist}
+		%\RCitem{PC1}{\DONE{En la pantalla falta el botón del ojito}}{18 de Abril del 2018}
+	\end{UClist}		
+}
+
+% %--------------------------------------------------------
+	
+\UCsection{Atributos}
+	\UCitem{Actor(es)}{
+		\cdtRef{Actor:RT}{Responsable de Titulación} y \cdtRef{Actor:AT}{Auxiliar de Titulación}
+	}
+	\UCitem{Propósito}{
+		Visualizar la información del examen profesional y generar el acta correspondiente.
+	}
+	\UCitem{Entradas}{
+		Ninguna
+	}
+	\UCitem{Salidas}{
+		
+		\begin{UClist}
+			Información del examen profesional
+			\UCli \cdtRef{Alumno:matricula}{Matrícula}. \ioObtener.
+			
+			\UCli Nombre: (\cdtRef{Alumno:primerApellido}{Primer apellido}, \cdtRef{Alumno:segundoApellido}{Segundo apellido} y \cdtRef{Alumno:nombre}{Nombre}). \ioObtener.
+			
+			\UCli \cdtRef{tesis:temaTesis}{Tema} de la tesis: \ioObtener.
+			
+			\UCli \cdtRef{horarioExamenProfesional:fecha}{Fecha} del examen: \ioObtener.
+			
+			\UCli \cdtRef{horarioExamenProfesional:hora}{Hora} del examen: \ioObtener.
+			
+			\UCli \cdtRef{Salones:nombre}{Salón} del examen: \ioObtener. 
+			
+			
+			Información del resultado:
+			\UCli \cdtRef{informacionExamenProfesional:actaEgresado}{Acta y/o Egresado}: \ioObtener. 
+			
+			\UCli \cdtRef{resultadoExamenProfesional:resultado}{Resultado}: \ioObtener.
+			
+			\UCli \cdtRef{resultadoExamenProfesional:mencionEspecial}{Mención especial}: \ioObtener.
+						
+			
+			
+			
+			
+			Información para el acta de examen:
+			\UCli \cdtRef{horarioExamenProfesional:fecha}{Fecha} del examen profesional. \ioObtener.
+			
+			\UCli \cdtRef{horarioExamenProfesional:salon}{Salón} del examen profesional. \ioObtener.
+			
+			\UCli Nombre: (\cdtRef{Alumno:nombre}{Nombre}, \cdtRef{Alumno:primerApellido}{Primer apellido} y \cdtRef{Alumno:segundoApellido}{Segundo apellido}). \ioObtener.
+			
+			\UCli Sínodo examinador:  (\cdtRef{profesor:tituloTratamiento}{Título de tratamiento}, \cdtRef{profesor:nombre}{Nombre}, \cdtRef{profesor:primerApellido}{Primer apellido} y \cdtRef{profesor:segundoApellido}{Segundo apellido}) del personal interno y (\cdtRef{invitado:nombre}{Nombre}, \cdtRef{invitado:primerApellido}{Primer apellido} y \cdtRef{invitado:segundoApellido}{Segundo apellido}) del personal externo. \ioObtener.						
+		\end{UClist}
+	}
+
+	\UCitem{Precondiciones}{
+		Ninguna
+	}
+	\UCitem{Postcondiciones}{
+		Ninguna
+	}
+	\UCitem{Reglas de negocio}{
+		Ninguna
+	}
+	\UCitem{Errores}{
+		Ninguna
+	}
+	\UCitem{Tipo}{Secundario, extiende del caso de uso \cdtIdRef{CUTI5.1-2}{Gestionar exámenes profesionales}.}
+\end{UseCase}
+
+\begin{UCtrayectoria}
+	
+	\UCpaso[\UCactor] Presiona el botón \cdtButton {Registrar Calificación} en la interfaz, Gestionar Materia.
+	
+	\UCpaso[\UCsist] Obtiene el nombre, matricula y calificaciones anteriores al departamental actual.
+	
+	\UCpaso[\UCactor] \label{RA:Seleccion} Selecciona al alumno que se le va a registrar su calificación.
+
+	\UCpaso[\UCsist] Valida que el alumno se encuentre en estado Activo en la materia. \refTray{A}
+	
+	\UCpaso[\UCactor] \label{RA:Calificación} Introduce la calificación en el alumno seleccionado. \refTray{B}
+	
+	\UCpaso[\UCactor] Presiona el botón \cdtButton{Aceptar}. \refTray{C}
+	
+	\UCpaso[\UCsist] Persiste la calificación asignada al alumno.
+	
+	\UCpaso[\UCsist] Muestra el mensaje Operación Exitosa, en la interfaz Registrar Calificación.
+	
+	\UCpaso[\UCactor] Presiona el botón \cdtButton{Regresar}. \refTray{D}
+	
+	\UCpaso[\UCsist] Muestra la interfaz Gestionar Materia
+	
+\end{UCtrayectoria}
+
+
+%...........::::::::::::TRAYECTORIAS ALTERNATIVAS::::::::::::::........
+%-------------------------Trayectoria A------------------------------
+\begin{UCtrayectoriaA}{A}{El alumno seleccionado se encuentra en estado inactivo}
+	\UCpaso[\UCsist] Muestra el mensaje Alumno en estado inactivo.
+	
+	\UCpaso[\UCactor] Lee el mensaje.
+	
+	\UCpaso[\UCactor] Presiona el botón \cdtButton{Aceptar}.
+
+	\UCpaso[\UCsist] Regresa al paso \ref{RA:Seleccion} de la trayectoria principal del caso de uso.
+	
+\end{UCtrayectoriaA}
+
+%...........::::::::::::TRAYECTORIAS ALTERNATIVAS::::::::::::::........
+%-------------------------Trayectoria A------------------------------
+\begin{UCtrayectoriaA}{B}{El actor introdujo una calificación no válida}
+	\UCpaso[\UCsist] Muestra el mensaje Formato de Calificación erróneo.
+	
+	\UCpaso[\UCactor] Lee el mensaje.
+	
+	\UCpaso[\UCactor] Presiona el botón \cdtButton{Aceptar}.
+	
+	\UCpaso[\UCsist] Regresa al paso \ref{RA:Calificación} de la trayectoria principal del caso de uso.
+	
+\end{UCtrayectoriaA}

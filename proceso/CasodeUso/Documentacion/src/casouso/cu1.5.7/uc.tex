@@ -1,0 +1,116 @@
+\begin{UseCase}{CU 1.5.7}{Seleccionar Proveedor para Producto} {
+	Seleccionar proveedor para un producto a la hora de llenar el formulario de Datos del Producto. Abre una ventana que muestra la interfaz "Seleccionar Proveedor" con los datos de los proveedores y un icono al lado de sus datos para seleccionarlo. Es indispensable que se escoja un proveedor para que el formulario pueda enviarse.
+}
+	
+\UCitem{Versión}{1.0}
+\UCccsection{Administración}
+\UCccitem{Autor}{Diego Armando Hernández Penilla}
+\UCccitem{Evaluador}{}
+\UCccitem{Operación}{}
+\UCccitem{Prioridad}{Media}
+\UCccitem{Complejidad}{Baja}
+\UCccitem{Volatilidad}{Baja}
+\UCccitem{Madurez}{Alta}
+\UCccitem{Estatus}{Edición}
+\UCccitem{Fecha del último estatus}{20 de diciembre del 2021}
+
+%% Copie y pegue este bloque tantas veces como revisiones tenga el caso de uso.
+%% Esta sección la debe llenar solo el Revisor
+% %--------------------------------------------------------
+	%   % Revisión Versión (Anote la versión que se revisó.)
+\UCccsection{Revisión Versión 0.1 }
+% 	% FECHA: Anote la fecha en que se terminó la revisión.
+\UCccitem{Fecha}{} 
+% 	% EVALUADOR: Coloque el nombre completo de quien realizó la revisión.
+\UCccitem{Evaluador}{}
+% 	% RESULTADO: Coloque la palabra que mas se apegue al tipo de acción que el analista debe realizar.
+\UCccitem{Resultado}{}
+% 	% OBSERVACIONES: Liste los cambios que debe realizar el Analista.
+\UCccitem{Observaciones}{
+	\begin{UClist}
+		%\RCitem{PC1}{\DONE{En la pantalla falta el botón del ojito}}{18 de Abril del 2018}
+	\end{UClist}		
+}
+
+% %--------------------------------------------------------
+	
+\UCsection{Atributos}
+	\UCitem{Actor(es)}{
+		\cdtRef{Actor: Empleado}{Empleado}
+	}
+	\UCitem{Propósito}{
+		Seleccionar el proveedor del producto para registrarlo.
+	}
+	\UCitem{Entradas}{
+		Ninguna
+	}
+	\UCitem{Salidas}{
+		Mensaje 1: " No se logró conectar a la base de datos".
+		Mensaje 2: "No se encuentran proveedores registrados, registrar uno".
+	}
+
+	\UCitem{Precondiciones}{
+		Haber registrado un proveedor.
+	}
+	\UCitem{Postcondiciones}{
+		El Empleado podrá terminar de registrar un producto ya que la selección de su proveedor es un campo obligatorio.
+	}
+	\UCitem{Reglas de negocio}{
+		Ninguna.
+	}
+	\UCitem{Errores}{
+		El Sistema no puede acceder a la Base de Datos.
+		No hay proveedores registrados.
+	}
+	\UCitem{Tipo}{
+		Include	
+	}
+
+\end{UseCase}
+
+\begin{UCtrayectoria}
+	
+	\UCpaso[\UCactor] En el formulario Registrar Producto o el de Modificar Producto, hacer clic en la flechita al lado del campo de "Proveedor".
+	
+	\UCpaso[\UCsist] Se conecta a la base de datos. [Trayectoria A]
+
+	\UCpaso[\UCsist] Muestra en otra ventata la interfaz "Seleccionar Proveedor".
+
+	\UCpaso[\UCsist] Obtiene los proveedores de la base de datos de 30 en 30.  [Trayectoria B].
+
+	\UCpaso[\UCsist] Muestra la lista de proveedores.
+
+	\UCpaso[\UCactor] Hace clic en el símbolo de manita señalando hacia arriba para seleccionar al proveedor que desea.
+
+	\UCpaso[\UCsist] Llena el campo con el nombre del proveedor seleccionado.
+	
+\end{UCtrayectoria}
+
+%...........::::::::::::TRAYECTORIAS ALTERNATIVAS::::::::::::::........
+%-------------------------Trayectoria A------------------------------
+\begin{UCtrayectoriaA}{A}{Sistema no puede acceder a la Base de Datos.}
+	
+	\UCpaso[\UCsist] Envía el mensaje 1: " No se logró conectar a la base de datos".
+	
+	\UCpaso[\UCactor] Hace clic en "Confirmar".
+
+	\UCpaso[\UCsist] Deja de mostrar el mensaje.
+
+	\UCpaso[]  Permanece en el formulario Registrar Producto (o Modificar Producto).
+
+\end{UCtrayectoriaA}
+
+%-------------------------Trayectoria B------------------------------
+\begin{UCtrayectoriaA}{B}{No hay proveedores registrados.}
+	
+	\UCpaso[\UCsist] Envía el mensaje 2: "No se encuentran proveedores registrados, registrar uno".
+
+	\UCpaso[\UCactor] Hace clic en "Confirmar".
+
+	\UCpaso[\UCsist] Deja de mostrar el mensaje.
+
+	\UCpaso[\UCsist] Cierra la ventana de la interfaz "Seleccionar Proveedor"
+
+	\UCpaso[]  Permanece en el formulario Registrar Producto (o Modificar Producto).
+
+\end{UCtrayectoriaA}

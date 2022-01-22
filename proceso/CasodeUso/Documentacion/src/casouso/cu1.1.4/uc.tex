@@ -1,0 +1,115 @@
+%Caso de uso 1
+\begin{UseCase} {CU1.1.4}{Confirmar venta al cliente}{
+	El empleado confirmara la venta, agregara el pago realizado por el cliente y generara ticket de compra.
+}
+
+\UCitem{Versión}{1.0}
+\UCccsection{Administración}
+\UCccitem{Autor}{Lechuga Canales Héctor Jair}
+\UCccitem{Evaluador}{}
+\UCccitem{Operación}{}
+\UCccitem{Prioridad}{Alta}
+\UCccitem{Complejidad}{Media}
+\UCccitem{Volatilidad}{Baja}
+\UCccitem{Madurez}{Alta}
+\UCccitem{Estatus}{Edición}
+\UCccitem{Fecha del último estatus}{19 de diciembre}
+
+% Copie y pegue este bloque tantas veces como revisiones tenga el caso de uso.
+% Esta sección la debe llenar solo el Revisor
+% --------------------------------------------------------
+
+% Revisión Versión 
+% Anote la versión que se revisó
+\UCccsection{Revisión Versión 0.1 }
+
+% Fecha
+% Anote la fecha en que se terminó la revisión
+\UCccitem{Fecha}{} 
+
+% Evaluador
+% Coloque el nombre completo de quien realizó la revisión
+\UCccitem{Evaluador}{}
+
+% Resultado
+% Coloque la palabra que mas se apegue al tipo de acción que el analista debe realizar
+\UCccitem{Resultado}{}
+
+% Observaciones
+% Liste los cambios que debe realizar el Analista.
+\UCccitem{Observaciones}{}
+
+% --------------------------------------------------------
+	
+\UCsection{Atributos}
+	\UCitem{Actor(es)}
+	{
+		\cdtRef{Actor:RT}{Vendedor}
+	}
+	\UCitem{Propósito}
+	{
+		Confirmar la venta y generar el ticket.
+	}
+	\UCitem{Entradas}
+	{
+		
+		\UCli Cantidad de dinero entregada por el cliente.
+	}
+	\UCitem{Salidas}
+	{
+		\UCli Código de barras 
+		\UCli Descripción del producto
+		\UCli Precio de venta
+		\UCli Piezas
+		\UCli Existencia actual
+		\UCli Total a pagar
+		\UCli Ticket de la compra
+	}
+
+	\UCitem{Precondiciones}
+	{
+		\UCli Debe estar agregado minimo un producto dentro del carrito de compras.
+
+	}
+	\UCitem{Postcondiciones}
+	{
+		El sistema debe actualizar la BD de productos e historial de ventas.
+	}
+	\UCitem{Reglas de negocio}
+	{
+		ninguna
+	}
+	\UCitem{Errores}
+	{
+		Ninguna
+	}
+	\UCitem{Tipo}{}
+\end{UseCase}
+
+%Trayectoria principal
+
+\begin{UCtrayectoria}
+		
+	\UCpaso [\UCactor]Selecciona el botón \cdtButton{Cobrar} ubicado en la interfaz \cdtRef{UI}{Productos en la venta actual}.
+	\UCpaso [\UCsist]Muestra una pantalla emergente llamada \cdtRef{UI}{Ticket de la compra}. con todos los productos que se agregaron al carrito de compras.
+	\UCpaso [\UCsist]Muestra mensaje 1: “Pagar la cantidad:000”
+	\UCpaso [\UCactor]Ingresa la cantidad que le pagaron.
+	\UCpaso [\UCsist]Muestra la cantidad del vuelto. 
+	\UCpaso [\UCactor]Selecciona el botón \cdtButton{Pagar}. \refTray{A}
+	\UCpaso [\UCsist]Guarda el ticket en el historial de ventas y se imprime uno para el cliente.
+	\UCpaso [\UCsist]Muestra mensaje 2: "Venta exitosa".
+	\UCpaso [\UCsist]Regresa a la pantalla "productos en la venta actual para registrar una nueva venta.
+\end{UCtrayectoria}
+
+
+% Trayectorias alternativas
+Trayectoria alternativa A
+
+\begin{UCtrayectoriaA}{A}{El cleinte desea eliminar productos o la venta total}
+
+	\UCpaso [\UCactor] Selecciona boton \cdtButton{Cancelar}.	
+	\UCpaso [\UCsist]Regresamos al paso \ref{CU 1.1.4:P1} de la TP.
+\end{UCtrayectoriaA}
+
+
+

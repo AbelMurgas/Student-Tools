@@ -1,0 +1,131 @@
+%Caso de uso 1.3.3 
+\begin{UseCase} {CU1.3.3}{Eliminar venta del historial}{
+	Permite que el empleado pueda eliminar la venta en caso de que
+	se haya duplicado o debe ser retirada del reporte de venta mensual.
+}
+
+\UCitem{Versión}{1.0}
+\UCccsection{Administración}
+\UCccitem{Autor}{Eduardo Alfonso Rivera }
+\UCccitem{Evaluador}{}
+\UCccitem{Operación}{}
+\UCccitem{Prioridad}{Media}
+\UCccitem{Complejidad}{Media}
+\UCccitem{Volatilidad}{Baja}
+\UCccitem{Madurez}{Alta}
+\UCccitem{Estatus}{Edición}
+\UCccitem{Fecha del último estatus}{17 de diciembre del 2021}
+
+% Copie y pegue este bloque tantas veces como revisiones tenga el caso de uso.
+% Esta sección la debe llenar solo el Revisor
+% --------------------------------------------------------
+
+% Revisión Versión 
+% Anote la versión que se revisó
+\UCccsection{Revisión Versión 0.1 }
+
+% Fecha
+% Anote la fecha en que se terminó la revisión
+\UCccitem{Fecha}{} 
+
+% Evaluador
+% Coloque el nombre completo de quien realizó la revisión
+\UCccitem{Evaluador}{}
+
+% Resultado
+% Coloque la palabra que mas se apegue al tipo de acción que el analista debe realizar
+\UCccitem{Resultado}{}
+
+% Observaciones
+% Liste los cambios que debe realizar el Analista.
+\UCccitem{Observaciones}{}
+
+% --------------------------------------------------------
+	
+\UCsection{Atributos}
+	\UCitem{Actor(es)}
+	{
+		\cdtRef{Actor:RT}{Empleado}
+	}
+	\UCitem{Propósito}
+	{
+		Quitar la venta del reporte de venta mensual y devolver los articulos a inventario.
+	}
+	\UCitem{Entradas}
+	{
+		\UCli Número de ticket.
+		\UCli Estatus de la venta.
+	}
+	\UCitem{Salidas}
+	{
+		\UCli Estatus de la venta.
+		\UCli Nombre de articulos vendidos.
+		\UCli Cantidad de articulos vendidos.
+		\UCli Precio por articulos.
+		\UCli Número de ticket o código de venta.
+		\UCli Fecha y hora de venta.
+		\UCli Nombre de empleado que atendió la venta.
+		\UCli Total de la venta.
+	}
+
+	\UCitem{Precondiciones}
+	{
+		\UCli Empleado debió de haber buscado la venta a eliminar del historial de ventas.
+		\UCli La venta debe estar en estatus modicado o realizada.
+	}
+	\UCitem{Postcondiciones}
+	{
+		\UCli Reporte de venta mensual disminuido.
+	}
+	\UCitem{Reglas de negocio}
+	{
+		\UCli RN019: Se conservan en la BD historica todas las ventas registradas, por lo que solo será un estado de " eliminada", su registro y sus detalles seguirán almacenados en la BD.
+		\UCli RN020: Solo las ventas modificadas o realizadas podrán cambiar a estatus de eliminadas.
+		\UCli RN025: Toda venta realizada en la farmacia debera tener asociado el nombre del empleado que realiza la venta, así mismo, si un empleado realiza una modificación en una venta, el nombre del empleado se actualiza por el empleado que realizo la modificación.
+\UCli RN028: Solo se podrán eliminar la venta en el mismo mes de la venta.
+	}
+	\UCitem{Errores}
+	{
+		Ninguna
+	}
+	\UCitem{Tipo}{}
+\end{UseCase}
+
+%Trayectoria principal
+
+\begin{UCtrayectoria}
+
+	\UCpaso [\UCactor]  Realiza busqueda de una venta en historial. <<include>> CU1.3.1 Busqueda de una venta en historial.
+	\UCpaso [\UCactor]  Da click en el icono de basura en la pantalla Gestionar venta del historial. 
+	\UCpaso [\UCsist] Obtiene los detalles de la venta en la BD. [Trayectoria A]
+	\UCpaso [\UCsist] Muestra la pantalla2 Eliminar venta del historial, con la información obtenida de los detalles de la venta.
+	\UCpaso [\UCsist] Muestra una alerta con el mensaje1 "¿Estás seguro de eliminar esta venta? Esta venta será eliminada del historial y no podrá modificarse."
+	\UCpaso [\UCactor] Selecciona la opción aceptar.\cdtButton{Aceptar} [Trayectoria B]
+	\UCpaso [\UCsist] Valida que la venta se pueda eliminar en base a la RN028. [Trayectoria C]
+	\UCpaso [\UCsist] Devuelve los articulos de la venta a inventario, descuenta el monto de la venta al calculo de venta mensual.
+	\UCpaso [\UCsist] Actualiza el nombre del empleado asociado a la venta en base a la RN025.
+	\UCpaso [\UCsist] Modifica el estatus de la venta a Eliminada con base en el DE1.
+	\UCpaso [\UCsist] Regresa a la pantalla Gestionar venta del historial.
+	\UCpaso [\UCsist] Muestra notificación con mensaje2: "Se elimino La venta con el código, ha sido modificada en el historial."
+\end{UCtrayectoria}
+
+
+% Trayectorias alternativas
+% Trayectoria alternativa A
+\begin{UCtrayectoriaA}{A}{ No puede realizar la consulta de la venta en la base de datos.}
+	\UCpaso [\UCsist] Notifica con mensaje4: "No se realizo la consulta en la base de datos".
+	\UCpaso [\UCsist] Se regresará a el paso 1 de la TP.
+\end{UCtrayectoriaA}
+
+
+% Trayectoria alternativa B
+\begin{UCtrayectoriaA}{B}{empleado selecciona la opcion cancelar.}
+	\UCpaso [\UCactor] Selecciona la opción cancelar.\cdtButton{Cancelar}
+	\UCpaso [\UCsist] Notifica con mensaje3: "No se modifica el estatus de la venta con el código, No ha sido modificada el historial."
+	\UCpaso [\UCsist] Regresa a el paso 1 de la TP.
+\end{UCtrayectoriaA}
+%Trayectoria alternativa C
+\begin{UCtrayectoriaA}{C}{ No cumple la RN028: La eliminación de la venta no se hace en el mismo mes de la venta.}
+	\UCpaso [\UCsist] Notifica con mensaje4: "No se puede eliminar esta venta porque no cumple la RN028".
+	\UCpaso [\UCsist] Se regresará a el paso 1 de la TP.
+\end{UCtrayectoriaA}

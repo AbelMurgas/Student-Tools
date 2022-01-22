@@ -1,0 +1,198 @@
+\begin{UseCase}{CU 1.5.2}{Registrar Producto en el Inventario} {
+	
+	Registra en el sistema un nuevo producto a través de un formulario que el sistema provee. Los campos a llenar son los siguientes: Nombre del producto (introducir texto), Proveedor (Include: CU1.5.7 "Seleccionar Proveedor para Producto"), Tipo (radio: abarrote, medicamento, equipo), Precio de Compra (recibe números con decimales), Precio de Venta (recibe números con decimales), Mínimo de Existencias (recibe enteros no negativos).
+
+}
+	
+\UCitem{Versión}{1.0}
+\UCccsection{Administración}
+\UCccitem{Autor}{Kevin Enrique Villavicencio Quintero}
+\UCccitem{Evaluador}{}
+\UCccitem{Operación}{}
+\UCccitem{Prioridad}{Alta}
+\UCccitem{Complejidad}{Media}
+\UCccitem{Volatilidad}{Baja}
+\UCccitem{Madurez}{Alta}
+\UCccitem{Estatus}{Edición}
+\UCccitem{Fecha del último estatus}{20 de diciembre del 2021}
+
+%% Copie y pegue este bloque tantas veces como revisiones tenga el caso de uso.
+%% Esta sección la debe llenar solo el Revisor
+% %--------------------------------------------------------
+	%   % Revisión Versión (Anote la versión que se revisó.)
+\UCccsection{Revisión Versión 0.1 }
+% 	% FECHA: Anote la fecha en que se terminó la revisión.
+\UCccitem{Fecha}{} 
+% 	% EVALUADOR: Coloque el nombre completo de quien realizó la revisión.
+\UCccitem{Evaluador}{}
+% 	% RESULTADO: Coloque la palabra que mas se apegue al tipo de acción que el analista debe realizar.
+\UCccitem{Resultado}{}
+% 	% OBSERVACIONES: Liste los cambios que debe realizar el Analista.
+\UCccitem{Observaciones}{
+	\begin{UClist}
+		%\RCitem{PC1}{\DONE{En la pantalla falta el botón del ojito}}{18 de Abril del 2018}
+	\end{UClist}		
+}
+
+% %--------------------------------------------------------
+	
+\UCsection{Atributos}
+	\UCitem{Actor(es)}{
+		\cdtRef{Actor}{Empleado}
+	}
+	\UCitem{Propósito}{
+		Registrar en el sistema un nuevo producto.
+	}
+	\UCitem{Entradas}{
+		Nombre del producto,
+		Proveedor,
+		Tipo,
+		Precio de Compra,
+		Precio de Venta,
+		Mínimo de Existencias,
+	}
+	\UCitem{Salidas}{
+			Mensaje 1: "El producto ha sido registrado con éxito.",
+			Mensaje 2: "Debe llenar todos los campos.",
+			Mensaje 3: "MIN.1 carácter. MAX. 99.",
+			Mensaje 4: "MAX. 3 enteros, 2 decimales.",
+			Mensaje 5: "Introduce un valor mayor o igual a cero.",
+			Mensaje 6:  " No se logró conectar a la base de datos.",
+			Mensaje 7: " Ya hay registrado un producto con los mismos datos".
+	}
+
+	\UCitem{Precondiciones}{
+		Ninguna
+	}
+	\UCitem{Postcondiciones}{
+		El Empleado, una vez registrado el producto  podrá modificar los datos de un producto; modificar la cantidad de existencias de un producto; descontinuar un producto y cancelar la descontinuación de un producto.
+	}
+	\UCitem{Reglas de negocio}{
+	RN5.2.- El nombre del producto no debe exceder los 99 caracteres ni ser menor a 1 carácter,
+	RN5.3.- El precio de cada producto es un número mayor a cero, con máximo dos dígitos después del punto decimal y no mayor a 5 digitos (incluyendo a los decimales),
+	RN5.4.- La cantidad mínima de existencias debe ser mayor o igual a cero y no exceder los 2 dígitos,
+	RN5.5.- No puede haber dos productos con los mismos datos
+	}
+	\UCitem{Errores}{
+		Faltan campos del formulario por llenar,
+		El nombre del producto no es válido,
+		El formato del precio de compra no es válido,
+		El formato del precio de venta no es válido,
+		La cantidad de existencias mínima no es válida,
+		Sistema no puede acceder a la Base de Datos,
+		Hay registrado otro producto con los mismos datos
+	}
+	\UCitem{Tipo}{
+		Extend
+	}
+\end{UseCase}
+
+\begin{UCtrayectoria}
+	
+	\UCpaso[\UCactor] En la interfaz de Inventario, hace clic en "Registrar Producto".
+	
+	\UCpaso[\UCsist] Muestra el formulario Datos del producto”.
+	
+	\UCpaso[\UCactor] Llena los campos del formulario.
+
+	\UCpaso[] Include 1:  C.U.1.5.7 "Seleccionar Proveedor para Producto".
+	
+	\UCpaso[\UCactor] Da clic en botón “Confirmar”.
+
+	\UCpaso[\UCsist] Verifica que todos los campos hayan sido llenados [Trayectoria A].
+
+	\UCpaso[\UCsist] Verifica que el nombre del producto sea válido de acuerdo con la regla de negocio RN5.2 [Trayectoria B].
+
+	\UCpaso[\UCsist] Verifica que el precio de compra ingresado sea válido de acuerdo con la regla de negocio RN5.3 [Trayectoria C].
+
+	\UCpaso[\UCsist] Verifica que el precio de venta ingresado sea válido de acuerdo con la regla de negocio RN5.3 [Trayectoria D].
+	
+	\UCpaso[\UCsist] Verifica que la cantidad del producto sea válida de acuerdo con la regla de negocio RN5.4 [Trayectoria E].
+
+	\UCpaso[\UCsist] Se conecta a la base de datos. [Trayectoria F]
+
+	\UCpaso[\UCsist] Verifica en la base de datos que se cumpla la regla de negocios RN5.5. [Trayectoria G].
+
+	\UCpaso[\UCsist] Genera una clave única aleatoria de ocho dígitos para el producto.
+	
+	\UCpaso[\UCsist] Guarda en la base de datos la clave y los datos que se obtuvieron del formulario.
+
+	\UCpaso[\UCsist] Muestra el mensaje 1: "El producto ha sido registrado con éxito".
+
+	\UCpaso[\UCactor] Da clic en botón “Confirmar”.
+
+	\UCpaso[\UCsist] Muestra a la interfaz de Inventario.
+
+	\UCpaso[\UCsist] Obtiene el producto que acaba de registrar de la Base de Datos.
+
+	\UCpaso[\UCsist] Muestra producto que acaba de registrar.
+	
+\end{UCtrayectoria}
+
+
+%...........::::::::::::TRAYECTORIAS ALTERNATIVAS::::::::::::::........
+%-------------------------Trayectoria A------------------------------
+\begin{UCtrayectoriaA}{A}{Faltan campos del formulario por llenar}
+	
+	\UCpaso[\UCsist] Envía el mensaje 2: "Debe llenar todos los campos."
+
+	\UCpaso[] Permanece en el formulario Datos del Producto.
+
+\end{UCtrayectoriaA}
+%-------------------------Trayectoria B------------------------------
+\begin{UCtrayectoriaA}{B}{El nombre del producto no es válido}
+	
+	\UCpaso[\UCsist] Muestra el mensaje 3 al lado del campo "Nombre del producto": "MIN.1 carácter. MAX. 99"
+
+	\UCpaso[] Permanece en el formulario Datos del Producto.
+
+\end{UCtrayectoriaA}
+%-------------------------Trayectoria C------------------------------
+\begin{UCtrayectoriaA}{C}{El formato del precio de compra no es válido}
+	
+	\UCpaso[\UCsist] Muestra el mensaje 4 al lado del campo "Precio de Compra": "MAX. 3 enteros, 2 decimales"
+
+	\UCpaso[] Permanece en el formulario Datos del Producto.
+
+\end{UCtrayectoriaA}
+%-------------------------Trayectoria D------------------------------
+\begin{UCtrayectoriaA}{D}{El formato del precio de venta no es válido}
+	
+	\UCpaso[\UCsist] Envía el mensaje 4 al lado del campo "Precio de Venta": "MAX. 3 enteros, 2 decimales".
+
+	\UCpaso[] Permanece en el formulario Datos del Producto.
+
+\end{UCtrayectoriaA}
+%-------------------------Trayectoria E------------------------------
+\begin{UCtrayectoriaA}{E}{La cantidad de existencias mínima no es válida}
+	
+	\UCpaso[\UCsist] Envía el mensaje 5.- "Introduce un valor mayor o igual a cero".	
+
+	\UCpaso[] Permanece en el formulario Datos del Producto.
+
+\end{UCtrayectoriaA}
+
+%-------------------------Trayectoria F------------------------------
+\begin{UCtrayectoriaA}{F}{Sistema no puede acceder a la Base de Datos.}
+	
+	\UCpaso[\UCsist] Envía el mensaje 6: " No se logró conectar a la base de datos".
+	
+	\UCpaso[\UCactor] Hace clic en "Confirmar".
+
+	\UCpaso[\UCsist] Deja de mostrar el mensaje.
+
+	\UCpaso[] Permanece en el formulario Datos del Producto.
+
+\end{UCtrayectoriaA}
+%-------------------------Trayectoria G------------------------------
+\begin{UCtrayectoriaA}{G}{Hay registrado otro producto con los mismos datos}
+	
+	\UCpaso[\UCsist] Envía el mensaje 7: " Ya hay registrado un producto con los mismos datos".
+	
+	\UCpaso[\UCactor] Hace clic en "Confirmar".
+
+	\UCpaso[\UCsist] Deja de mostrar el mensaje.
+
+	\UCpaso[] Permanece en el formulario Datos del Producto.
+
+\end{UCtrayectoriaA}

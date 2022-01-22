@@ -1,0 +1,103 @@
+\begin{UseCase}{CU 1.5.6}{Cancelar Descontinuación Producto del Inventario} {
+	
+	Cancelar Descontinuación un producto del Inventario haciendo clic en el ícono de menos de un producto en la parte de ajustes.
+}
+	
+\UCitem{Versión}{1.0}
+\UCccsection{Administración}
+\UCccitem{Autor}{Kevin Enrique Villavicencio Quintero}
+\UCccitem{Evaluador}{}
+\UCccitem{Operación}{}
+\UCccitem{Prioridad}{Alta}
+\UCccitem{Complejidad}{Media}
+\UCccitem{Volatilidad}{Baja}
+\UCccitem{Madurez}{Alta}
+\UCccitem{Estatus}{Edición}
+\UCccitem{Fecha del último estatus}{20 de diciembre del 2021}
+
+%% Copie y pegue este bloque tantas veces como revisiones tenga el caso de uso.
+%% Esta sección la debe llenar solo el Revisor
+% %--------------------------------------------------------
+	%   % Revisión Versión (Anote la versión que se revisó.)
+\UCccsection{Revisión Versión 0.1 }
+% 	% FECHA: Anote la fecha en que se terminó la revisión.
+\UCccitem{Fecha}{} 
+% 	% EVALUADOR: Coloque el nombre completo de quien realizó la revisión.
+\UCccitem{Evaluador}{}
+% 	% RESULTADO: Coloque la palabra que mas se apegue al tipo de acción que el analista debe realizar.
+\UCccitem{Resultado}{}
+% 	% OBSERVACIONES: Liste los cambios que debe realizar el Analista.
+\UCccitem{Observaciones}{
+	\begin{UClist}
+		%\RCitem{PC1}{\DONE{En la pantalla falta el botón del ojito}}{18 de Abril del 2018}
+	\end{UClist}		
+}
+
+% %--------------------------------------------------------
+	
+\UCsection{Atributos}
+	\UCitem{Actor(es)}{
+		\cdtRef{Actor}{Empleado}
+	}
+	\UCitem{Propósito}{
+		Cancelar descontinuación de un producto del Inventario desde la interfaz de Inventario.
+	}
+	\UCitem{Entradas}{
+		Ninguna.
+	}
+	\UCitem{Salidas}{
+		Ninguna	
+	}
+
+	\UCitem{Precondiciones}{
+		Haber registrado al menos un producto en el inventario.
+		Haber descontinuado un producto.
+	}
+	\UCitem{Postcondiciones}{
+		Puede volver a descontinuar al producto.
+	}
+	\UCitem{Reglas de negocio}{
+		Ninguna.
+
+	}
+	\UCitem{Errores}{
+		Ninguna
+	}
+	\UCitem{Tipo}{
+		Extend.
+	}
+\end{UseCase}
+
+\begin{UCtrayectoria}
+	
+	\UCpaso[\UCactor] En la interfaz de Inventario, hace clic en el ícono de palomita en los Ajustes de un producto.
+
+	\UCpaso[\UCsist] Muestra la ventana “Cancelar Descontinuación de Productos”.
+
+	\UCpaso[\UCsist] Muestra los datos del producto a cancelar descontinuación.
+
+	\UCpaso[\UCactor] Hace clic en Confirmar.
+
+	\UCpaso[\UCsist] Accede a la Base de Datos. [Trayectoria A]
+
+	\UCpaso[\UCsist] Hace los cambios en la Base de Datos.
+
+	\UCpaso[\UCsist] Cierra la ventana “Cancelar Descontinuación Productoss”.
+
+	\UCpaso[\UCsist] Muestra el mensaje 1 en la interfaz de Inventario: "Se ha cancelado la descontinuación del producto con éxito".
+	
+\end{UCtrayectoria}
+
+%...........::::::::::::TRAYECTORIAS ALTERNATIVAS::::::::::::::........
+%-------------------------Trayectoria A------------------------------
+\begin{UCtrayectoriaA}{A}{Sistema no puede acceder a la Base de Datos.}
+	
+	\UCpaso[\UCsist] Envía el mensaje 2: " No se logró conectar a la base de datos".
+	
+	\UCpaso[\UCactor] Hace clic en "Confirmar".
+
+	\UCpaso[\UCsist] Deja de mostrar el mensaje.
+
+	\UCpaso[] Permanece en la interfaz “Cancelar Descontinuación Productoss”.
+
+\end{UCtrayectoriaA}

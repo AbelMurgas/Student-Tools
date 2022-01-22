@@ -1,0 +1,147 @@
+%Caso de uso 1
+\begin{UseCase} {CU1.1.1}{Buscar producto para el carrito de compras}{
+	El empleado agregara los productos que el cliente desea comprar, saberel moto de cada medicamento, monto total y el número de productos agregados a la venta.
+}
+
+\UCitem{Versión}{1.0}
+\UCccsection{Administración}
+\UCccitem{Autor}{Bravo Aguayo Alejandro}
+\UCccitem{Evaluador}{}
+\UCccitem{Operación}{}
+\UCccitem{Prioridad}{Alta}
+\UCccitem{Complejidad}{Media}
+\UCccitem{Volatilidad}{Baja}
+\UCccitem{Madurez}{Alta}
+\UCccitem{Estatus}{Edición}
+\UCccitem{Fecha del último estatus}{19 de diciembre}
+
+% Copie y pegue este bloque tantas veces como revisiones tenga el caso de uso.
+% Esta sección la debe llenar solo el Revisor
+% --------------------------------------------------------
+
+% Revisión Versión 
+% Anote la versión que se revisó
+\UCccsection{Revisión Versión 0.1 }
+
+% Fecha
+% Anote la fecha en que se terminó la revisión
+\UCccitem{Fecha}{} 
+
+% Evaluador
+% Coloque el nombre completo de quien realizó la revisión
+\UCccitem{Evaluador}{}
+
+% Resultado
+% Coloque la palabra que mas se apegue al tipo de acción que el analista debe realizar
+\UCccitem{Resultado}{}
+
+% Observaciones
+% Liste los cambios que debe realizar el Analista.
+\UCccitem{Observaciones}{}
+
+% --------------------------------------------------------
+	
+\UCsection{Atributos}
+	\UCitem{Actor(es)}
+	{
+		\cdtRef{Actor:RT}{Vendedor}
+	}
+	\UCitem{Propósito}
+	{
+		Agregar prodctos al carrito de compras.
+	}
+	\UCitem{Entradas}
+	{
+		\UCli Codigo de barras
+		\UCli Nombre
+	}
+	\UCitem{Salidas}
+	{
+		\UCli Código de barras 
+		\UCli Descripción del producto
+		\UCli Precio de venta
+		\UCli Piezas
+		\UCli Existencia actual
+	}
+
+	\UCitem{Precondiciones}
+	{
+		\UCli El producto debe tener existencias. 
+		\UCli El producto debe estar previamente ingresado en el sistema
+
+
+	}
+	\UCitem{Postcondiciones}
+	{
+		Ninguna
+	}
+	\UCitem{Reglas de negocio}
+	{
+		\cdtRef{RN-3}{Venta con receta médica}
+	}
+	\UCitem{Errores}
+	{
+		Ninguna
+	}
+	\UCitem{Tipo}{}
+\end{UseCase}
+
+%Trayectoria principal
+
+\begin{UCtrayectoria}
+		
+	\UCpaso [\UCactor]Selecciona \cdtButton{Ventas} en la interfaz del menú principal.
+	\UCpaso [\UCsist]Muestra la interfaz \cdtRef{UI}{Productos en la venta actual}.
+	\UCpaso [\UCsist]Obtiene los datos: Código de barras, nombre, descripción del producto, cantidad, existencia actual y precio al publico de la BD de Productos.
+	\UCpaso [\UCactor]Escanea el producto uno a uno cuidando que se cumpla con la regla del negocio \cdtRef{RN-3}{Venta con receta médica}. \refTray{A}, \refTray{B}, \label{CU 		1.1.1:P4}
+	\UCpaso [\UCsist]Muestra  la cantidad de productos agregados a la lista de productos del cliente en un campo llamado “Total de productos”. 
+	\UCpaso [\UCsist]Muestra el total a pagar de la lista de productos agregados en un capo llamado “Total”.
+
+	
+\end{UCtrayectoria}
+
+
+% Trayectorias alternativas
+% Trayectoria alternativa A
+
+\begin{UCtrayectoriaA}{A}{El empleado no pudo escanear el código de barras o no tiene escaner}
+
+	\UCpaso [\UCsist] Envía el mensaje 1: \cdtRef{MSG}{Producto no encontrado}.
+	\UCpaso [\UCactor] Ingresa manualmente el código de los productos y dara enter para agregarlos al carrito.
+	\UCpaso [\UCsist]Regresamos al \ref{CU 1.1.1:P4} de la TP.
+\end{UCtrayectoriaA}
+
+% Trayectoria alternativa B
+
+\begin{UCtrayectoriaA}{B}{El empleado desea agregar productos desde una consulta en la BD de pruductos.}
+
+	\UCpaso [\UCactor]Selecciona el boton \cdtButton{Buscar}.
+	\UCpaso [\UCsist]Despliega una interfaz con un pequeño mensaje  en la parte superior\cdtRef{MSG}{Ingresa las primeras letras del nombre del producto} y un texto "producto" seguido de un 		input text.
+	\UCpaso [\UCactor]Ingresara el nombre o las primeras letras de este del producto que desea buscar.
+	\UCpaso [\UCsist] Include: \cdtRef{CU 1.5.2}{CU 1.5.2 Consultar productor}Obtiene los datos: Nombre, descripción del producto, cantidad, existencia actual y precio al publico de la BD de 		Productos de las coincidencias encontradas.
+	\UCpaso [\UCactor]Selecciona el producto que desea.
+	\UCpaso [\UCsist]Muestra en la parte inferior derecha un boton \cdtButton{Agregar}.
+	\UCpaso [\UCactor]Selecciona el boton \cdtButton{Agregar}.
+	\UCpaso [\UCsist]Agrega el producto al carrito de compras y regresa a la interfaz\cdtRef{UI}{Productos en la venta actual}.
+	\UCpaso [\UCsist]Regresamos al \ref{CU 1.1.1:P4} de la TP.
+
+\end{UCtrayectoriaA}
+
+% Trayectoria alternativa C
+
+% \begin{UCtrayectoriaA}{C}{Inventario con poca existencia.}
+
+% 	\UCpaso [\UCsist]Envía mensaje 2: \cdtRef{MSG}{Pocas existencias}.
+% 	\UCpaso [\UCsist]Regresamos al \ref{CU 1.1.1:P6} de la TP.
+
+% \end{UCtrayectoriaA}
+
+% Trayectoria alternativa D
+
+%\begin{UCtrayectoriaA}{D}{Inventario sin existencias.}
+
+%	\UCpaso [\UCsist]envía mensaje 3: \cdtRef{MSG}{ Producto sin existencias}.
+%	\UCpaso [\UCsist]Regresamos al \ref{CU 1.1.1:P4} de la TP.
+
+%\end{UCtrayectoriaA}
+

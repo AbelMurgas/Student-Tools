@@ -1,0 +1,125 @@
+\begin{UseCase}{CUTI5.1-8}{Registrar compra a proveedor} {%
+	
+El empleado registra la entrada de un producto al inventario.
+	
+}
+	
+\UCitem{Versión}{1.0}
+\UCccsection{Administración}
+\UCccitem{Autor}{Reyes Vaca Mauricio Alberto}
+\UCccitem{Evaluador}{}
+\UCccitem{Operación}{}
+\UCccitem{Prioridad}{Alta}
+\UCccitem{Complejidad}{Media}
+\UCccitem{Volatilidad}{Baja}
+\UCccitem{Madurez}{Alta}
+\UCccitem{Estatus}{Edición}
+\UCccitem{Fecha del último estatus}{20 de noviembre del 2021}
+
+%% Copie y pegue este bloque tantas veces como revisiones tenga el caso de uso.
+%% Esta sección la debe llenar solo el Revisor
+% %--------------------------------------------------------
+	%   % Revisión Versión (Anote la versión que se revisó.)
+\UCccsection{Revisión Versión 0.1 }
+% 	% FECHA: Anote la fecha en que se terminó la revisión.
+\UCccitem{Fecha}{} 
+% 	% EVALUADOR: Coloque el nombre completo de quien realizó la revisión.
+\UCccitem{Evaluador}{}
+% 	% RESULTADO: Coloque la palabra que mas se apegue al tipo de acción que el analista debe realizar.
+\UCccitem{Resultado}{}
+% 	% OBSERVACIONES: Liste los cambios que debe realizar el Analista.
+\UCccitem{Observaciones}{
+	\begin{UClist}
+		%\RCitem{PC1}{\DONE{En la pantalla falta el botón del ojito}}{18 de Abril del 2018}
+	\end{UClist}		
+}
+
+% %--------------------------------------------------------
+	
+\UCsection{Atributos}
+	\UCitem{Actor(es)}{
+		\cdtRef{Actor:RT}{Sistema} y \cdtRef{Actor:AT}{Administrador}
+	}
+	\UCitem{Propósito}{
+		Agregar al sistema una nueva compra o proveedor.
+	}
+	\UCitem{Entradas}{
+
+		\begin{UClist}
+
+			Información básica de la compra a proveedor.			
+			\UCli Nombre del proveedor: (\cdtRef{Alumno:primerApellido}{Primer apellido}, \cdtRef{Alumno:segundoApellido}{Segundo apellido} y \cdtRef{Alumno:nombre}{Nombre}).
+			
+			\UCli \cdtRef{tesis:Título de la empresa}{Nombre de la empresa}.
+
+			\UCli \cdtRef{tesis:Producto}{Nombre del producto}
+
+			\UCli \cdtRef{tesis:Cantidad}{Cantidad}
+
+		\end{UClist}
+	}
+	\UCitem{Salidas}{
+
+	}
+
+	\UCitem{Precondiciones}{
+		Tener al menos 1 proveedor registrado en el sistema.
+	}
+	\UCitem{Postcondiciones}{
+		Ninguna
+	}
+	\UCitem{Reglas de negocio}{
+		Ninguna
+	}
+	\UCitem{Errores}{
+		Ninguna
+	}
+	\UCitem{Tipo}{Secundario}
+\end{UseCase}
+
+\begin{UCtrayectoria}
+	
+	\UCpaso[\UCactor] Da clic en el ícono \cdtButton{Menú} de la pantalla \cdtIdRef{IUTI5.1-2}{Index}.
+	\UCpaso[\UCactor] Da clic en el ícono \cdtButton{Proveedor}.
+	\UCpaso[\UCactor] Da clic en el ícono \cdtButton{Registrar compra a proveedor}.
+	\UCpaso[\UCsist]  Muestra pantalla con formulario "Registrar compra a proveedor".
+	\UCpaso[\UCactor] Llena el formulario con los datos básicos.
+	\UCpaso[\UCactor] Da clic en el botón "Confirmar".
+	\UCpaso[\UCsist] Verifica que todos los campos hayan sido llenados. \refTray{A}
+	\UCpaso[\UCsist] Verifica que la cantidad ingresada sea válido de acuerdo con la regla de negocio RN1.\refTray{B}
+	\UCpaso[\UCsist] Accede a la base de datos. \refTray{D}
+	\UCpaso[\UCsist] Verifica que exista el proveedor. \refTray{C}
+	\UCpaso[\UCsist] Guarda los cambios en la base de datos.
+	\UCpaso[\UCsist] Envía mensaje 5: "La compra a proveedor ha sido registrado con éxito".
+	\UCpaso[\UCsist] Vacía el formulario.
+	\UCpaso[\UCsist] Muestra la pantalla \cdtIdRef{IUTI5.1-8}{Visualizar Resultado} con la información registrada.
+	\UCpaso[\UCactor] Solcita terminar con el registro compra a proveedor presionando el botón \cdtButton{Regresar}.
+	\UCpaso[\UCsist] Muestra la pantalla \cdtIdRef{IUTI5.1-2}{Index}.
+	
+\end{UCtrayectoria}
+
+
+%...........::::::::::::TRAYECTORIAS ALTERNATIVAS::::::::::::::........
+%-------------------------Trayectoria A------------------------------
+\begin{UCtrayectoriaA}{A}{Campos incompletos}
+	\UCpaso[\UCsist] Envía el mensaje 1: "Debes ingresar la información requerida en todos los campos.			
+	\UCpaso[] Regresa al paso 5 de la trayectoria principal.
+\end{UCtrayectoriaA}
+
+%-------------------------Trayectoria B------------------------------
+\begin{UCtrayectoriaA}{B}{La cantidad llenada es cero}
+	\UCpaso[\UCsist] Envía el mensaje 2: "Debes ingresar un cantidad valida."			
+	\UCpaso[] Regresa al paso 5 de la trayectoria principal.
+\end{UCtrayectoriaA}
+
+%-------------------------Trayectoria C------------------------------
+\begin{UCtrayectoriaA}{C}{Proveedor previamente registrado}
+	\UCpaso[\UCsist] Envía el mensaje 3: "No se encontro el proveedor que ingreso, intente registrarlo previo a esta operación."			
+	\UCpaso[] Regresa al paso 5 de la trayectoria principal.
+\end{UCtrayectoriaA}
+
+%-------------------------Trayectoria D------------------------------
+\begin{UCtrayectoriaA}{D}{Base de Datos caída}
+	\UCpaso[\UCsist] Envía el mensaje 4: "Base de Datos no disponible, por favor intente más tarde".			
+	\UCpaso[] Regresa al paso 5 de la trayectoria principal.
+\end{UCtrayectoriaA}

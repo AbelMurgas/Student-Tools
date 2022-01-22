@@ -1,0 +1,42 @@
+\subsection{IUTI5.1-8 Visualizar Resultado}
+
+\subsubsection{Objetivo}
+
+	Esta pantalla permite a la \cdtRef{Actor:RT}{Responsable de Titulación} y \cdtRef{Actor:AT}{Auxiliar de Titulación} visualizar el resultado de la evaluación del examen profesional del alumno. 
+	El actor podrá generar el acta del examen  cuando la solicitud de examen profesional cambia a \textbf{Examen presentado}.
+
+\subsubsection{Diseño}
+
+    En la figura \ref{IUTI5.1-8} se muestra la pantalla ''Visualizar Resultado", la cual contiene cuatro secciones. La primera 'Información del examen profesional' contiene la matrícula, primer apellido, segundo apellido y nombre del alumno, tema de la tesis, fecha, hora y lugar del examen.
+    
+    En la segunda sección 'Información del resultado' contiene el número de acta y/o egresado, el resultado y las menciones honorificas obtenidas en la evaluación del examen profesional. 
+    
+    En la tercera sección 'Miembros del sínodo designado' contiene el nombramiento, nombre, primer apellido y segundo apellido, fecha de titulación, y tipo de miembro.
+
+	Finalmente, la cuarta sección 'Miembros del sínodo examinador' contiene el nombramiento, nombre, primer apellido y segundo apellido, fecha de titulación, y tipo de miembro.  
+	   
+    \IUfig[.9]{../ModeloComportamiento/modulo-titulacion/Titulacion/cuti5_1-8/images/IUTI5_1-8}{IUTI5.1-8}{Visualizar Resultado}
+
+\subsubsection{Comandos}
+
+	\begin{itemize}
+		
+		\item \cdtButton{Regresar}: Permite al actor terminar la visualización del examen profesional, dirige a la pantalla \cdtIdRef{IUTI5.1-2}{Gestionar Exámenes Profesionales}.
+		
+	\end{itemize}
+
+
+%-----------ACTA DE EXAMEN---------------
+
+\subsection{IUTI5.1-8A Acta de Examen}
+
+\subsubsection{Objetivo}
+	Esta pantalla permite a la \cdtRef{Actor:RT}{Responsable de Titulación} y \cdtRef{Actor:AT}{Auxiliar de Titulación} visualizar el acta del examen profesional del alumno, la cual contiene toda la información del examen profesional, del sínodo examinador y el resultado tras la evaluación de este.
+
+\subsubsection{Diseño}
+
+	En la figura \ref{IUTI5.1-8A} se muestra la pantalla ''Acta de Examen'', en la cual se visualizará un texto preestablecido, con la información del examen profesional presentado por el alumno. 
+	
+	Se podrá generar el acta de examen cuando la solicitud de examen profesional se encuentre en el estado \textbf{Examen presentado}.
+
+	\IUfig[.9]{../ModeloComportamiento/modulo-titulacion/Titulacion/cuti5_1-8/images/IUTI5_1-8A}{IUTI5.1-8A}{Acta de Examen}

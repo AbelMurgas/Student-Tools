@@ -1,0 +1,247 @@
+
+% El tipo de regla de negocio (tercer parámetro del entorno 'BusinessRule') se describe en la siguiente tabla:
+%---------------------------------------------------------------------------------------------------------------,
+% TIPOS			|		DEFINICION						|	EJEMPLO												|
+%---------------|---------------------------------------|-------------------------------------------------------|
+% Habilitador   | La sentencia habilita o restringe 	| * Se pueden recibir solicitudes del tipo A, B y C.	|
+%				| hacer algo o  una funcionalidad.		| * Se permite hacer algo si se tiene el estado X.		|
+%---------------|---------------------------------------|-------------------------------------------------------|
+% Cronometrado	| Se permite de manera controlada 		| * Se permiten hasta dos solicitudes del tipo D		| 
+%				| por un contador.						|   por persona.										|
+% 				|										| * El acceso al sistema se permite si no se tiene 		|
+%  				|										|   más de X número de intentos fallidos.				|
+%---------------|---------------------------------------|-------------------------------------------------------|
+% Ejecutivo		| Autorizado por un superior, un perfil | * Se permite registrar extemporaneamente si lo 		|
+%				| particular debe autorizar.			|   autoriza X.											|
+%---------------|---------------------------------------|-------------------------------------------------------|
+% Derivación	| Son de cálculo e inferencia, 			| * Un alumno irregular es aquel que tiene las 			|
+%				| es un cálculo o conclusión derivados 	|   siguientes cacteristicas: A, B, C. 					|
+%				| de un conjunto de datos. Puede ser una| * El formato de un correo o CURP.						|
+%				| fórmula que dice cómo calcular algo 	|														|
+%				| o el formato de un dato.				|														|
+%---------------|---------------------------------------|-------------------------------------------------------|
+% Restricción	| Restringe una funcionalidad o relación| * Traslape de fechas o periodos empalmados.			|
+% 				| entre dos o mas objetos.				|														|
+%  				|										|														|
+%---------------------------------------------------------------------------------------------------------------'
+
+% No editar las reglas cuyo estatus es APROBADO.
+
+\section{Reglas de negocio}
+\subsection{Reglas derivadas del sistema}
+%------------------------------------------------------------------------------------------------------------------
+\begin{BusinessRule}{RN-1}{Definición de producto}
+	{Definición}
+	{Controla la operación}
+	\BRitem{Versión}{1.0}
+	\BRitem{Autor}{Oscar Apolonio Tierrablanca}
+	\BRitem{Estatus}{Edición}
+	\BRitem{Descripción}{Un prodcuto es asquel que tiene un nombre, un código de barras y una descripción asosiados y se encuentra en la base de datos.}
+		
+	
+\end{BusinessRule}
+
+\begin{BusinessRule}{RN-2}{Formato de codigo de barras.}
+	{Restricción}
+	{Controla la operación}
+	\BRitem{Versión}{1.0}
+	\BRitem{Autor}{Oscar Apolonio Tierrablanca}
+	\BRitem{Estatus}{Edición}
+	\BRitem{Descripción}{El codigo de barras es una cadena de numeros de 13 caracteres}
+		
+	
+\end{BusinessRule}
+
+\begin{BusinessRule}{RN-3}{Venta con receta médica.}
+	{Restricción}
+	{Controla la operación}
+	\BRitem{Versión}{1.0}
+	\BRitem{Autor}{Jair Lechuga}
+	\BRitem{Estatus}{Edición}
+	\BRitem{Descripción}{
+		El medicamento antibiótico, medicamento controlado y algunos otros que necesiten previa autorización de un médico no podrán venderse sin receta médica valida.
+	}
+		
+\end{BusinessRule}
+
+\begin{BusinessRule}{RN-4}{Eliminar proveedor con pedidos pendientes}
+	{Restricción}
+	{Controla la operación}
+	\BRitem{Versión}{1.0}
+	\BRitem{Autor}{Gonzaga Aparicio Josue}
+	\BRitem{Estatus}{Revisiòn}
+	\BRitem{Descripción}{
+		Un proveedor con pedidos pendientes no puede ser eliminado. (Eliminaciòn lògica).
+	}
+		
+\end{BusinessRule}
+
+\begin{BusinessRule}{RN-6}{Cantidad de productos en carrito valida.}
+	{Restricción}
+	{Controla la operación}
+	\BRitem{Versión}{1.0}
+	\BRitem{Autor}{Reyes Vaca Mauricio Alberto}
+	\BRitem{Estatus}{Edición}
+	\BRitem{Descripción}{
+		La cantidad debe de ser mayor a 0 y menor o igual a cantidad en existencia.
+	}
+		
+\end{BusinessRule}
+
+\begin{BusinessRule}{RN-07}{Asociacion de productos a proveedor}
+	{Restricción}
+	{Controla la operación}
+	\BRitem{Versión}{1.0}
+	\BRitem{Autor}{Apolonio Tierrablanca Oscar}
+	\BRitem{Estatus}{Edición}
+	\BRitem{Descripción}{Todos los productos deben estar asociados a un proveedor.}
+
+\end{BusinessRule}
+
+\begin{BusinessRule}{RN-08}{Cantidad minima de productos a resurtir}
+	{Restricción}
+	{Controla la operación}
+	\BRitem{Versión}{1.0}
+	\BRitem{Autor}{Apolonio Tierrablanca Oscar}
+	\BRitem{Estatus}{Edición}
+	\BRitem{Descripción}{La cantidad de productos que se resurten al sistema debe ser mayor o igual a uno.}
+
+\end{BusinessRule}
+
+\begin{BusinessRule}{RN-010}{Formato de No. de ticket}
+	{Definición}
+	{Controla la operación}
+	\BRitem{Versión}{1.0}
+	\BRitem{Autor}{Rivera Morelos Eduardo Alfonso}
+	\BRitem{Estatus}{Edición}
+	\BRitem{Descripción}{El No. de ticket es una cadena de números de 8 caracteres}
+
+\end{BusinessRule}
+
+\begin{BusinessRule}{RN-014}{Datos esenciales de una venta}
+	{Definición}
+	{Controla la operación}
+	\BRitem{Versión}{1.0}
+	\BRitem{Autor}{Rivera Morelos Eduardo Alfonso}
+	\BRitem{Estatus}{Edición}
+	\BRitem{Descripción}{Toda ventarealizada en la farmacia tendrá como datos esenciales: Número de ticket, Fecha y hora de venta, Total de la venta}
+
+\end{BusinessRule}
+
+\begin{BusinessRule}{RN-017}{No. de ticket para devolución}
+	{Restricción}
+	{Controla la operación}
+	\BRitem{Versión}{1.0}
+	\BRitem{Autor}{Rivera Morelos Eduardo Alfonso}
+	\BRitem{Estatus}{Edición}
+	\BRitem{Descripción}{El No. de ticket para una devolución debe ser mayor o igual que al No. de ticket de la primera venta del 1ro de diciembre del 2021}
+
+\end{BusinessRule}
+
+\begin{BusinessRule}{RN-018}{Devolución}
+	{Definición}
+	{Controla la operación}
+	\BRitem{Versión}{1.0}
+	\BRitem{Autor}{Rivera Morelos Eduardo Alfonso}
+	\BRitem{Estatus}{Edición}
+	\BRitem{Descripción}{En una devolución se reciben los productos fisicos, se reducen los productos de una venta y se entrega al cliente en efectivo el valor de los productos devueltos de la venta.}
+
+\end{BusinessRule}
+\begin{BusinessRule}{RN-019}{Requisitos para una devolución}
+	{Restricción}
+	{Controla la operación}
+	\BRitem{Versión}{1.0}
+	\BRitem{Autor}{Rivera Morelos Eduardo Alfonso}
+	\BRitem{Estatus}{Edición}
+	\BRitem{Descripción}{Si un cliente quiere devolver un producto de una venta deberá presentar en original y una copia el ticket de la venta del producto.}
+
+\end{BusinessRule}
+
+\begin{BusinessRule}{RN-020}{Condición de un producto a devolver}
+	{Restricción}
+	{Controla la operación}
+	\BRitem{Versión}{1.0}
+	\BRitem{Autor}{Rivera Morelos Eduardo Alfonso}
+	\BRitem{Estatus}{Edición}
+	\BRitem{Descripción}{Solo se aceptará la devolución de un producto si el producto se encuentra en perfectas condiciones, en el caso de devolución de medicamentos de uso exclusivo con receta  los medicamentos deberán estar en su empaque original y sellados}
+
+\end{BusinessRule}
+
+\begin{BusinessRule}{RN-022}{Fecha limite para devolver un producto}
+	{Restricción}
+	{Controla la operación}
+	\BRitem{Versión}{1.0}
+	\BRitem{Autor}{Rivera Morelos Eduardo Alfonso}
+	\BRitem{Estatus}{Edición}
+	\BRitem{Descripción}{Se aceptará la devolución de productos hasta 15 días después de su venta, en el caso de devolver medicamentos solo tendrán hasta 3 días después de su venta.}
+
+\end{BusinessRule}
+
+
+\begin{BusinessRule}{RN-025}{Actualización de fecha y hora de una venta}
+	{Restricción}
+	{Controla la operación}
+	\BRitem{Versión}{1.0}
+	\BRitem{Autor}{Rivera Morelos Eduardo Alfonso}
+	\BRitem{Estatus}{Edición}
+	\BRitem{Descripción}{Toda venta realizada en la farmacia deberá tener la fecha y hora que se realiza la venta, así mismo, si un empleado realiza una devolución se actualiza la fecha y hora de la venta por la devolución. }
+
+\end{BusinessRule}
+
+\begin{BusinessRule}{RN-027}{Cliente solicita la venta de un producto que recién devolvio}
+	{Restricción}
+	{Controla la operación}
+	\BRitem{Versión}{1.0}
+	\BRitem{Autor}{Rivera Morelos Eduardo Alfonso}
+	\BRitem{Estatus}{Edición}
+	\BRitem{Descripción}{Si el cliente solicita la venta de un producto que recién devolvio se debe realizar una venta nueva}
+\end{BusinessRule}
+
+\begin{BusinessRule}{RN-025}{Actualización de fecha y hora de una venta}
+	{Restricción}
+	{Controla la operación}
+	\BRitem{Versión}{1.0}
+	\BRitem{Autor}{Rivera Morelos Eduardo Alfonso}
+	\BRitem{Estatus}{Edición}
+	\BRitem{Descripción}{Toda venta realizada en la farmacia debera tener la fecha y hora que se realiza la venta, así mismo si un empleado realiza una devolución, se actualiza la fecha y hora de la venta por la devolución. }
+
+\end{BusinessRule}
+
+\begin{BusinessRule}{RN-051}{Nombre de producto}
+	{Restricción}
+	{Controla la operación}
+	\BRitem{Versión}{1.0}
+	\BRitem{Autor}{Diego Armando Hernández Penilla}
+	\BRitem{Estatus}{Edición}
+	\BRitem{Descripción}{ El nombre del producto no debe exceder los 99 caracteres ni ser menor a 1 carácter.}
+
+\end{BusinessRule}
+
+\begin{BusinessRule}{RN-052}{Código de barras}
+	{Restricción}
+	{Controla la operación}
+	\BRitem{Versión}{1.0}
+	\BRitem{Autor}{Diego Armando Hernández Penilla}
+	\BRitem{Estatus}{Edición}
+	\BRitem{Descripción}{El código de barras debe ser un número único de 13 dígitos, los cuales los primeros 3 son la clave del país, los siguientes 3 de la empresa, siguientes 4 del producto y el último dígito es el verificador.}
+
+\end{BusinessRule}
+
+\begin{BusinessRule}{RN-053}{Descripción del producto}
+	{Restricción}
+	{Controla la operación}
+	\BRitem{Versión}{1.0}
+	\BRitem{Autor}{Diego Armando Hernández Penilla}
+	\BRitem{Estatus}{Edición}
+	\BRitem{Descripción}{La descripción del producto, si es un medicamento menciona el activo y la cantidad del contenido (tabletas, gramos, mililitros, etc). Si es otro tipo de producto, una descripción superficial basta. No debe exceder los 99 caracteres ni ser menor a 1 carácter.}
+
+\end{BusinessRule}
+\begin{BusinessRule}{RN-054}{Precio de Venta}
+	{Restricción}
+	{Controla la operación}
+	\BRitem{Versión}{1.0}
+	\BRitem{Autor}{Diego Armando Hernández Penilla}
+	\BRitem{Estatus}{Edición}
+	\BRitem{Descripción}{ El precio de venta de un producto es un número no negativo que contiene dos decimales.}
+
+\end{BusinessRule}

@@ -1,0 +1,192 @@
+\begin{UseCase}{CU 1.5.1}{Registrar producto nuevo al Inventario} {
+	
+	Registra en el sistema los datos de un nuevo producto a través de un formulario. Los campos a llenar son los siguientes:
+	\UCli Nombre del producto (debe escribir el nombre del producto siguiendo la RN5.1)
+	\UCli Código de Barras (debe escribir el código de barras siguiendo la RN5.2)
+	\UCli Tipo (Debe seleccionar si es un medicamento, un abarrote o un equipo)
+	\UCli Descripción del producto (Debe escribir la descripción del producto según la RN5.3)
+	\UCli Proveedor (Del combobox debe seleccionar el proveedor del producto)
+	\UCli Precio de venta (Escribir el precio de venta según la RN5.4)
+
+}
+	
+\UCitem{Versión}{1.0}
+\UCccsection{Administración}
+\UCccitem{Autor}{Diego Armando Hernández Penilla}
+\UCccitem{Evaluador}{}
+\UCccitem{Operación}{}
+\UCccitem{Prioridad}{Alta}
+\UCccitem{Complejidad}{Baja}
+\UCccitem{Volatilidad}{Baja}
+\UCccitem{Madurez}{Alta}
+\UCccitem{Estatus}{Edición}
+\UCccitem{Fecha del último estatus}{04 de enero del 2022}
+
+%% Copie y pegue este bloque tantas veces como revisiones tenga el caso de uso.
+%% Esta sección la debe llenar solo el Revisor
+% %--------------------------------------------------------
+	%   % Revisión Versión (Anote la versión que se revisó.)
+\UCccsection{Revisión Versión 0.1 }
+% 	% FECHA: Anote la fecha en que se terminó la revisión.
+\UCccitem{Fecha}{04 de enero del 2022} 
+% 	% EVALUADOR: Coloque el nombre completo de quien realizó la revisión.
+\UCccitem{Evaluador}{}
+% 	% RESULTADO: Coloque la palabra que mas se apegue al tipo de acción que el analista debe realizar.
+\UCccitem{Resultado}{}
+% 	% OBSERVACIONES: Liste los cambios que debe realizar el Analista.
+\UCccitem{Observaciones}{
+	\begin{UClist}
+		%\RCitem{PC1}{\DONE{En la pantalla falta el botón del ojito}}{18 de Abril del 2018}
+	\end{UClist}		
+}
+
+% %--------------------------------------------------------
+	
+\UCsection{Atributos}
+	\UCitem{Actor(es)}{
+		\cdtRef{Actor}{Administrador de la farmacia}
+	}
+	\UCitem{Propósito}{
+		Registrar en el sistema los datos de un nuevo producto.
+	}
+	\UCitem{Entradas}{
+		\UCli Nombre del producto 
+		\UCli Código de Barras
+		\UCli Tipo
+		\UCli Descripción del producto
+		\UCli Proveedor
+		\UCli Precio de venta
+	}
+	\UCitem{Salidas}{
+		Ninguna.
+	}
+
+	\UCitem{Precondiciones}{
+		Haber registrado al menos un proveedor.
+	}
+	\UCitem{Postcondiciones}{
+		\UCli Modificar datos del producto.
+		\UCli Resurtir existencias del producto.
+		\UCli Agregar al carrito de venta para un cliente.
+		\UCli Registrar una devolución por parte de un cliente.
+	}
+	\UCitem{Reglas de negocio}{
+		\UCli RN-051
+		\UCli RN-052
+		\UCli RN-053
+		\UCli RN-054.
+	}
+	\UCitem{Errores}{
+		\UCli No hay proveedores registrados.
+		\UCli El nombre del producto no es válido
+		\UCli El código de barras no es válido
+		\UCli El tamaño de la descripción del producto no es válido
+		\UCli El precio de venta no es válido
+		\UCli Faltan campos del formulario por llenar
+		\UCli Hay registrado otro producto con el mismo código de barras.
+	}
+	\UCitem{Tipo}{
+		Secundario ya que extiende el CU 1.3 Compra de productos a proveedor y el CU 1.5 Gestionar Inventario
+	}
+\end{UseCase}
+
+\begin{UCtrayectoria}
+	
+	\UCpaso[\UCactor] En la interfaz de Inventario, hace clic en el botón "Registrar Producto".
+	
+	\UCpaso[\UCsist] Muestra el formulario "Registrar producto”.
+
+	\UCpaso[\UCsist] Obtiene de la base de datos a los proveedores. [Trayectoria A]
+	
+	\UCpaso[\UCactor] Llena los campos del formulario.
+	
+	\UCpaso[\UCactor] Da clic en botón “Confirmar”.
+
+	\UCpaso[\UCsist] Verifica que todos los campos hayan sido llenados [Trayectoria B].
+
+	\UCpaso[\UCsist] Verifica que el nombre del producto sea válido de acuerdo con la regla de negocio RN-051 [Trayectoria C].
+
+	\UCpaso[\UCsist] Verifica que el código de barras sea válido de acuerdo con la regla de negocio RN-052 [Trayectoria D].
+
+	\UCpaso[\UCsist] Verifica que el tamaño de la descripción del producto sea válida de acuerdo con la regla de negocio RN-053 [Trayectoria E].
+
+	\UCpaso[\UCsist] Verifica que el precio de venta ingresado sea válido de acuerdo con la regla de negocio RN-054 [Trayectoria F].
+
+	\UCpaso[\UCsist] Verifica en la base de datos que el código de barras sea único como lo indica la regla de negocios RN-052. [Trayectoria G].
+	
+	\UCpaso[\UCsist] Guarda en la base de datos lo que se obtuvo del formulario.
+
+	\UCpaso[\UCsist] Muestra el mensaje 1: "Producto registrado exitosamente".
+
+	\UCpaso[] Regresa a la interfaz de inventario.
+	
+\end{UCtrayectoria}
+
+
+%...........::::::::::::TRAYECTORIAS ALTERNATIVAS::::::::::::::........
+%-------------------------Trayectoria A------------------------------
+\begin{UCtrayectoriaA}{A}{No hay proveedores registrados}
+	
+	\UCpaso[\UCsist] Envía el mensaje 2: "No hay ningún proveedor registrado, registrar uno antes de registrar un producto."
+
+	\UCpaso[\UCactor] Hace clic en "Aceptar".
+
+	\UCpaso[] Regresa a la interfaz de inventario.
+
+\end{UCtrayectoriaA}
+
+%-------------------------Trayectoria B------------------------------
+\begin{UCtrayectoriaA}{B}{Faltan campos del formulario por llenar}
+	
+	\UCpaso[\UCsist] Muestra el mensaje 3: "Debe llenar todos los campos."
+
+	\UCpaso[] Permanece en el formulario.
+
+\end{UCtrayectoriaA}
+
+%-------------------------Trayectoria C------------------------------
+\begin{UCtrayectoriaA}{C}{El nombre del producto no es válido}
+	
+	\UCpaso[\UCsist] Muestra el mensaje 4 al lado del campo "Nombre del producto": "Min.1 / Max. 99 caracteres".
+
+	\UCpaso[] Permanece en el formulario.
+
+\end{UCtrayectoriaA}
+%-------------------------Trayectoria D------------------------------
+\begin{UCtrayectoriaA}{D}{El código de barras no es válido}
+	
+	\UCpaso[\UCsist] Muestra el mensaje 5 al lado del campo "Código de barras": "Inválido, revisar la RN5.2"
+
+	\UCpaso[] Permanece en el formulario.
+
+\end{UCtrayectoriaA}
+%-------------------------Trayectoria E------------------------------
+\begin{UCtrayectoriaA}{E}{El tamaño de la descripción no es válido}
+	
+	\UCpaso[\UCsist] Muestra el mensaje 6 al lado del campo "Descripción de Producto": "Min.1 / Max. 99 caracteres"
+
+	\UCpaso[] Permanece en el formulario.
+
+\end{UCtrayectoriaA}
+
+%-------------------------Trayectoria F------------------------------
+\begin{UCtrayectoriaA}{F}{El precio de venta no es válido}
+	
+	\UCpaso[\UCsist] Muestra el mensaje 7 al lado del campo "Precio de Venta": "No negativo y 2 decimales"
+
+	\UCpaso[] Permanece en el formulario.
+
+\end{UCtrayectoriaA}
+
+%-------------------------Trayectoria G------------------------------
+\begin{UCtrayectoriaA}{G}{Ya hay registrado un producto con el mismo código de barras}
+	
+	\UCpaso[\UCsist] Envía el mensaje 8: " Ya hay un producto registrado con ese código".
+	
+	\UCpaso[\UCactor] Hace clic en "Confirmar".
+
+	\UCpaso[\UCsist] Deja de mostrar el mensaje.
+
+	\UCpaso[] Permanece en el formulario.
+
+\end{UCtrayectoriaA}

@@ -1,0 +1,150 @@
+\begin{UseCase}{CU6}{Registrar datos de un aspirante} { %Apoloinio
+	
+	Permite al actor registrar los datos básicos de un aspirante para realizar el examen de admisión, para tener un registro de las personas que realizarán el examen para posteriormente asociar un puntaje.
+
+}
+	
+\UCitem{Versión}{1.0}
+\UCccsection{Administración}
+\UCccitem{Autor}{Gómez Caballero Brenda}
+\UCccitem{Evaluador}{}
+\UCccitem{Operación}{}
+\UCccitem{Prioridad}{Alta}
+\UCccitem{Complejidad}{Media}
+\UCccitem{Volatilidad}{Baja}
+\UCccitem{Madurez}{Alta}
+\UCccitem{Estatus}{Edición}
+\UCccitem{Fecha del último estatus}{27 de Septiembre del 2018}
+
+%% Copie y pegue este bloque tantas veces como revisiones tenga el caso de uso.
+%% Esta sección la debe llenar solo el Revisor
+% %--------------------------------------------------------
+	%   % Revisión Versión (Anote la versión que se revisó.)
+\UCccsection{Revisión Versión 0.1 }
+% 	% FECHA: Anote la fecha en que se terminó la revisión.
+\UCccitem{Fecha}{} 
+% 	% EVALUADOR: Coloque el nombre completo de quien realizó la revisión.
+\UCccitem{Evaluador}{}
+% 	% RESULTADO: Coloque la palabra que mas se apegue al tipo de acción que el analista debe realizar.
+\UCccitem{Resultado}{}
+% 	% OBSERVACIONES: Liste los cambios que debe realizar el Analista.
+\UCccitem{Observaciones}{
+	\begin{UClist}
+		%\RCitem{PC1}{\DONE{En la pantalla falta el botón del ojito}}{18 de Abril del 2018}
+	\end{UClist}		
+}
+
+% %--------------------------------------------------------
+	
+\UCsection{Atributos}
+	\UCitem{Actor(es)}{
+		\cdtRef{Actor:RT}{Responsable de Titulación} y \cdtRef{Actor:AT}{Auxiliar de Titulación}
+	}
+	\UCitem{Propósito}{
+		Visualizar la información del examen profesional y generar el acta correspondiente.
+	}
+	\UCitem{Entradas}{
+		Ninguna
+	}
+	\UCitem{Salidas}{
+		
+		\begin{UClist}
+			Información del examen profesional
+			\UCli \cdtRef{Alumno:matricula}{Matrícula}. \ioObtener.
+			
+			\UCli Nombre: (\cdtRef{Alumno:primerApellido}{Primer apellido}, \cdtRef{Alumno:segundoApellido}{Segundo apellido} y \cdtRef{Alumno:nombre}{Nombre}). \ioObtener.
+			
+			\UCli \cdtRef{tesis:temaTesis}{Tema} de la tesis: \ioObtener.
+			
+			\UCli \cdtRef{horarioExamenProfesional:fecha}{Fecha} del examen: \ioObtener.
+			
+			\UCli \cdtRef{horarioExamenProfesional:hora}{Hora} del examen: \ioObtener.
+			
+			\UCli \cdtRef{Salones:nombre}{Salón} del examen: \ioObtener. 
+			
+			
+			Información del resultado:
+			\UCli \cdtRef{informacionExamenProfesional:actaEgresado}{Acta y/o Egresado}: \ioObtener. 
+			
+			\UCli \cdtRef{resultadoExamenProfesional:resultado}{Resultado}: \ioObtener.
+			
+			\UCli \cdtRef{resultadoExamenProfesional:mencionEspecial}{Mención especial}: \ioObtener.
+						
+			
+			
+			
+			
+			Información para el acta de examen:
+			\UCli \cdtRef{horarioExamenProfesional:fecha}{Fecha} del examen profesional. \ioObtener.
+			
+			\UCli \cdtRef{horarioExamenProfesional:salon}{Salón} del examen profesional. \ioObtener.
+			
+			\UCli Nombre: (\cdtRef{Alumno:nombre}{Nombre}, \cdtRef{Alumno:primerApellido}{Primer apellido} y \cdtRef{Alumno:segundoApellido}{Segundo apellido}). \ioObtener.
+			
+			\UCli Sínodo examinador:  (\cdtRef{profesor:tituloTratamiento}{Título de tratamiento}, \cdtRef{profesor:nombre}{Nombre}, \cdtRef{profesor:primerApellido}{Primer apellido} y \cdtRef{profesor:segundoApellido}{Segundo apellido}) del personal interno y (\cdtRef{invitado:nombre}{Nombre}, \cdtRef{invitado:primerApellido}{Primer apellido} y \cdtRef{invitado:segundoApellido}{Segundo apellido}) del personal externo. \ioObtener.						
+		\end{UClist}
+	}
+
+	\UCitem{Precondiciones}{
+		Ninguna
+	}
+	\UCitem{Postcondiciones}{
+		Ninguna
+	}
+	\UCitem{Reglas de negocio}{
+		Ninguna
+	}
+	\UCitem{Errores}{
+		Ninguna
+	}
+	\UCitem{Tipo}{Secundario, extiende del caso de uso \cdtIdRef{CUTI5.1-2}{Gestionar exámenes profesionales}.}
+\end{UseCase}
+
+
+%...........::::::::::::TRAYECTORIA PRINCIPAL::::::::::::::........
+
+\begin{UCtrayectoria}
+	
+	\UCpaso[\UCactor] Selecciona opción registrar datos de aspirante.
+	
+	\UCpaso[\UCsist] Muestra un formulario para que el aspirante ingrese sus datos básicos.
+	
+	\UCpaso[\UCactor] Llena el formulario.
+	
+	\UCpaso[\UCactor] Pulsa tecla de confirmar. 
+	
+	\UCpaso[\UCsist] Valida que los campos obligatorios se hayan ingresado [ Trayectoria A ]
+	
+	\UCpaso[\UCsist] Valida que el CURP cumpla con el formato con base en la regla del negocio 1. [Trayectoria alternativa B]
+	
+	\UCpaso[\UCsist] Valida que esté en un rango de edad con base en el RN2, edad de un aspirante. [Trayectoria alternativa C]
+	
+	\UCpaso[\UCsist] Valida que el correo cumpla con un formato válido. [Trayectoria alternativa D]
+
+	\UCpaso[\UCsist] Valida que el número telefónico tenga 10 dígitos. [Trayectoria alternativa E]
+
+	\UCpaso[\UCsist] Guarda la información.
+
+	\UCpaso[\UCsist] Notifica al aspirante el mensaje 1: Registro exitoso
+
+	\UCpaso[\UCsist] Asignar número de folio al registro.
+	
+\end{UCtrayectoria}
+
+
+%...........::::::::::::TRAYECTORIAS ALTERNATIVAS::::::::::::::........
+%-------------------------Trayectoria A------------------------------
+\begin{UCtrayectoriaA}{A}{El usuario no ingresó los datos obligatorios.}
+	\UCpaso[\UCsist] Envía el mensaje 2: Debes ingresar todos los campos marcados como obligatorios.
+			
+	\UCpaso[] Regresamos al paso 2 de la TP.
+	
+\end{UCtrayectoriaA}
+
+%-------------------------Trayectoria B------------------------------
+\begin{UCtrayectoriaA}{B}{El CURP no cumple con un formato válido.}
+	\UCpaso[\UCsist] Muestra el mensaje 3: El CURP no cumple con un formato válido.
+			
+	\UCpaso[] Regresamos al paso 6 de la TP.
+	
+\end{UCtrayectoriaA}

@@ -1,0 +1,108 @@
+\begin{UseCase}{CU 1.5.4}{Modificar cantidad de existencias} {
+	
+	Modificar la cantidad de existencias de un producto por medio de una interfaz, accesible desde la interfaz de Inventario. Por defecto no puede poner números negativos o mayores a dos dígitos.
+
+}
+	
+\UCitem{Versión}{1.0}
+\UCccsection{Administración}
+\UCccitem{Autor}{Diego Armando Hernández Penilla}
+\UCccitem{Evaluador}{}
+\UCccitem{Operación}{}
+\UCccitem{Prioridad}{Baja}
+\UCccitem{Complejidad}{Media}
+\UCccitem{Volatilidad}{Baja}
+\UCccitem{Madurez}{Alta}
+\UCccitem{Estatus}{Edición}
+\UCccitem{Fecha del último estatus}{20 de diciembre del 2021}
+
+%% Copie y pegue este bloque tantas veces como revisiones tenga el caso de uso.
+%% Esta sección la debe llenar solo el Revisor
+% %--------------------------------------------------------
+	%   % Revisión Versión (Anote la versión que se revisó.)
+\UCccsection{Revisión Versión 0.1 }
+% 	% FECHA: Anote la fecha en que se terminó la revisión.
+\UCccitem{Fecha}{} 
+% 	% EVALUADOR: Coloque el nombre completo de quien realizó la revisión.
+\UCccitem{Evaluador}{}
+% 	% RESULTADO: Coloque la palabra que mas se apegue al tipo de acción que el analista debe realizar.
+\UCccitem{Resultado}{}
+% 	% OBSERVACIONES: Liste los cambios que debe realizar el Analista.
+\UCccitem{Observaciones}{
+	\begin{UClist}
+		%\RCitem{PC1}{\DONE{En la pantalla falta el botón del ojito}}{18 de Abril del 2018}
+	\end{UClist}		
+}
+
+% %--------------------------------------------------------
+	
+\UCsection{Atributos}
+	\UCitem{Actor(es)}{
+		\cdtRef{Actor}{Empleado}
+	}
+	\UCitem{Propósito}{
+		Modificar la cantidad de existencias de un producto.
+	}
+	\UCitem{Entradas}{
+		Existencias.
+	}
+	\UCitem{Salidas}{
+		Mensaje 1: "Las existencias del producto han sido modificadas con éxito",
+
+		Mensaje 2: " No se logró conectar a la base de datos".
+	}
+
+	\UCitem{Precondiciones}{
+		Haber Registrado al menos un producto con anterioridad.
+	}
+	\UCitem{Postcondiciones}{
+		Ninguna.
+	}
+	\UCitem{Reglas de negocio}{
+		Ninguna.
+	}
+	\UCitem{Errores}{
+		Ninguno
+	}
+	\UCitem{Tipo}{
+		Extend
+	}
+\end{UseCase}
+
+\begin{UCtrayectoria}
+	
+	\UCpaso[\UCactor] En la interfaz de Inventario, hace clic en el ícono de flechas encontradas de algún producto por la columna de ajustes.
+	
+	\UCpaso[\UCsist] Muestra la ventana “Modificar cantidad de existencias”.
+
+	\UCpaso[\UCsist] Muestra los datos del producto a modificar.
+ 	
+	\UCpaso[\UCactor] Modifica el número de existencias.
+	
+	\UCpaso[\UCactor] Da clic en botón “Confirmar”.
+
+	\UCpaso[\UCsist] Accede a la Base de Datos. [Trayectoria A]
+
+	\UCpaso[\UCsist] Hace los cambios en la Base de Datos.
+
+	\UCpaso[\UCsist] Cierra la ventana “Modificar cantidad de existencias”.
+
+	\UCpaso[\UCsist] Muestra el mensaje 1 en la interfaz de Inventario: "Las existencias del producto han sido modificadas con éxito".
+
+	
+\end{UCtrayectoria}
+
+%...........::::::::::::TRAYECTORIAS ALTERNATIVAS::::::::::::::........
+%-------------------------Trayectoria A------------------------------
+\begin{UCtrayectoriaA}{A}{Sistema no puede acceder a la Base de Datos.}
+	
+	\UCpaso[\UCsist] Envía el mensaje 2: " No se logró conectar a la base de datos".
+	
+	\UCpaso[\UCactor] Hace clic en "Confirmar".
+
+	\UCpaso[\UCsist] Deja de mostrar el mensaje.
+
+	\UCpaso[] Permanece en la interfaz Modificar cantidad de existencias.
+
+\end{UCtrayectoriaA}
+

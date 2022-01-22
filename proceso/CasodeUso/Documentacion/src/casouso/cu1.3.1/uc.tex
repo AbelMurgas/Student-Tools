@@ -1,0 +1,128 @@
+%Caso de uso 1.3.1
+\begin{UseCase} {CU1.3.1}{Busqueda de una venta del historial}{
+	Permitir que el empleado pueda buscar una venta dentro del historial de la farmacia, la podrá buscar por fecha o por número de ticket.
+}
+
+\UCitem{Versión}{1.0}
+\UCccsection{Administración}
+\UCccitem{Autor}{Eduardo Alfonso Rivera }
+\UCccitem{Evaluador}{}
+\UCccitem{Operación}{}
+\UCccitem{Prioridad}{Alta}
+\UCccitem{Complejidad}{Media}
+\UCccitem{Volatilidad}{Baja}
+\UCccitem{Madurez}{Alta}
+\UCccitem{Estatus}{Edición}
+\UCccitem{Fecha del último estatus}{17 de diciembre 2021}
+
+% Copie y pegue este bloque tantas veces como revisiones tenga el caso de uso.
+% Esta sección la debe llenar solo el Revisor
+% --------------------------------------------------------
+
+% Revisión Versión 
+% Anote la versión que se revisó
+\UCccsection{Revisión Versión 0.1 }
+
+% Fecha
+% Anote la fecha en que se terminó la revisión
+\UCccitem{Fecha}{} 
+
+% Evaluador
+% Coloque el nombre completo de quien realizó la revisión
+\UCccitem{Evaluador}{}
+
+% Resultado
+% Coloque la palabra que mas se apegue al tipo de acción que el analista debe realizar
+\UCccitem{Resultado}{}
+
+% Observaciones
+% Liste los cambios que debe realizar el Analista.
+\UCccitem{Observaciones}{}
+
+% --------------------------------------------------------
+	
+\UCsection{Atributos}
+	\UCitem{Actor(es)}
+	{
+		\cdtRef{Actor:RT}{Administrador de la farmacia}
+	}
+	\UCitem{Propósito}
+	{
+		El empleado podrá realizar la busqueda de una venta para llevar un mayor control si desea solicitar los detalles de una venta o si desea modificar el estatus de la venta posteriormente.
+	}
+	\UCitem{Entradas}
+	{
+		\UCli Número de ticket.
+		\UCli Fecha de venta.
+	}
+	\UCitem{Salidas}
+	{
+		\UCli Estatus de la venta.
+		\UCli Número de ticket o código de venta.
+		\UCli Fecha y hora de venta.
+		\UCli Nombre de empleado que atendió la venta.
+		\UCli Total de la venta.
+	}
+
+	\UCitem{Precondiciones}
+	{
+		\UCli Debe existir la venta dentro del historial de ventas.
+		\UCli Se toma en cuenta la RN017 para el historial de ventas.
+	}
+	\UCitem{Postcondiciones}
+	{
+		Ninguna
+	}
+	\UCitem{Reglas de negocio}
+	{
+		\UCli RN017: El historial de venta se inicio el 1ro de noviembre del 2021 por lo que fechas anteriores al inicio del historial de ventas se tomarán como fechas invalidas para una busqueda, además terminando el historial con el corte del dia anterior.
+	}
+	\UCitem{Errores}
+	{
+		Ninguna
+	}
+	\UCitem{Tipo}{}
+\end{UseCase}
+
+%Trayectoria principal
+
+\begin{UCtrayectoria}
+		
+	\UCpaso [\UCactor] Da click en el botón de Historial de Ventas de la pantalla Historial. \cdtButton{Ventas}
+	\UCpaso [\UCsist] Muestra la pantalla1 Busqueda en historial de ventas.
+	\UCpaso [\UCsist] Muestra un formulario que le pedirá 2 fechas para realizar un filtrado entre ambas fechas.
+		     %y facilitarle la búsqueda de ventas de manera más eficiente.
+	\UCpaso [\UCactor] Llena el formulario con las fechas que serán el intervalo de busqueda. [Trayectoria A][Trayectoria C]
+	\UCpaso [\UCactor] Da click en el botón buscar. \cdtButton {Buscar}
+	\UCpaso [\UCsist] Obtiene las ventas realizadas de la BD. [Trayectoria D]
+	\UCpaso [\UCsist] Ordena las ventas en orden cronológico. 
+	\UCpaso [\UCsist] Muestra la pantalla2 Gestionar venta del HIstorial, dando los resultados de ventas realizadas en el intervalo de tiempo entre las dos fechas.
+	%% \UCpaso [\UCsist] En cada venta tiene la posibilidad de seleccionar la venta y visualizar sus detalles.
+	
+	
+\end{UCtrayectoria}
+
+
+% Trayectorias alternativas
+% Trayectoria alternativa A
+
+\begin{UCtrayectoriaA}{A}{ Empleado realiza la consulta por la opción de número de ticket.}
+	\UCpaso [\UCactor] Realiza busqueda de venta asociada con el código de ticket y le da click en el botón Buscar.\cdtButton{Buscar}[Trayectoria B]
+	\UCpaso [\UCsist] Se regresará a el paso 8 de la TP.
+\end{UCtrayectoriaA}
+%Trayectoria alternativa B dentro de la trayectoria A
+\begin{UCtrayectoriaA}{B}{dentro de la trayectoria Alternativa A: Empleado realiza busqueda con número de ticket invalido.}
+	\UCpaso [\UCsist] No encuentra venta asociada a ese número de ticket.
+	\UCpaso [\UCsist] Notifica con mensaje2: "Número de ticket invalido".
+	\UCpaso [\UCsist] Se regresa a el paso 2 de la TP.
+\end{UCtrayectoriaA}
+% Trayectoria alternativa C
+\begin{UCtrayectoriaA}{C}{ Empleado colocá una fecha invalida en el formulario según la RN017.}
+	\UCpaso [\UCsist] Notifica con mensaje3: "Fecha invalida para busqueda".
+	\UCpaso [\UCsist] Se regresará a el paso 2 de la TP.
+\end{UCtrayectoriaA}
+% Trayectoria alternativa D
+\begin{UCtrayectoriaA}{D}{No hay ventas realizadas en ese intervalo de tiempo}
+	\UCpaso [\UCsist] Notifica con mensaje5: "No hay ventas".
+	\UCpaso [\UCsist] Se regresará a el paso 2 de la TP.
+\end{UCtrayectoriaA}
